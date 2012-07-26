@@ -15,6 +15,11 @@
 
         <div data-role="content">
             <p>This is the homepage</p>
+            <ul id="sites" data-role="listview">
+                <% _.each(sites, function(site) { %>
+                    <li><a href="#"><%= site.location.name %></a></li>
+                <% }); %>
+            </ul>
         </div>
 
     </script>
@@ -38,6 +43,9 @@
     <script src="lib/jquery.mobile-1.1.1.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
+    <script src="lib/backbone.localStorage-min.js"></script>
+    <script src="app/models/site.js"></script>
+    <script src="app/collections/exercise.js"></script>
     <script src="app/views/home.js"></script>
     <script src="app/views/visualisation.js"></script>
     <script src="app/main.js"></script>

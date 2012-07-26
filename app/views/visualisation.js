@@ -1,3 +1,8 @@
+// Visualisation View
+// ------------------
+
+// A separate view which takes the Experiments collection
+// and displays a visualisation of it
 window.VisualisationView = Backbone.View.extend({
 
     template:_.template($('#visualisation').html()),

@@ -15,7 +15,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
     home:function () {
-        this.changePage(new HomeView(), 'home');
+        this.changePage(new HomeView({model: Sites}), 'home');
     },
 
     visualisation:function () {
@@ -42,7 +42,7 @@ var startApp = function() {
 
 /**
  * Start everything on document ready or deviceready depending on what system
- * we're on.
+ * type of device we're on.
  */
 if(window.Phonegap) {
     $(document).on('deviceready', startApp);
