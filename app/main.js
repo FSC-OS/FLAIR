@@ -48,5 +48,5 @@ if(window.Phonegap) {
     $(document).on('deviceready', startApp);
 }
 else {
-  $(document).ready(startApp);
+    $(document).ready(startApp);
 }
