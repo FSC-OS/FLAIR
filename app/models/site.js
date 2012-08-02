@@ -20,8 +20,9 @@ window.Site = Backbone.RelationalModel.extend({
 
     // Function to say whether all the experiments in this site are complete
     isComplete: function() {
-        // Optimistic for the moment
-        return true;
+        return this.get('experiments').all(function(experiment){
+            return experiment.isComplete();
+        });
     },
 
     // Function to clear this experiment
