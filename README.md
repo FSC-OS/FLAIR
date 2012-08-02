@@ -19,11 +19,11 @@ There are some settings to make this work nicely with jQuery Mobile in `app/jqm-
 * `lib` contains the third-party libraries we need (underscore, backbone, jquery, etc)
 * `app/views` contains the view classes
 * `app/models` contains the model classes
-* `app/collections` contains the collection classes (only one currently)
+* `app/collections` contains the collection classes which hold collections of models
 
 For the moment I've inlined all the templates which the views use into `index.html`, because they're pretty simple and loading them in from some other file would mean we _have_ to have a local web server running to avoid cross-domain issues, which is an additional barrier to entry for people wanting to try this out/test things.
 
 ### TODO
 As well as the issue list, there are some more immediate todos for the first milestone:
-* Figure out how to use backbone-relational to structure our models so that we have a collection of sites which contain a list of experiments, or perhaps a collection of exercise which contain sites which contain experiments. The goal for the first milestone being to present a list of sites on the homepage, each of which links to a view of all the experiments in that site (a list of their names or something will suffice).
+* _Now Done_ ~~Figure out how to use backbone-relational to structure our models so that we have a collection of sites which contain a list of experiments, or perhaps a collection of exercise which contain sites which contain experiments. The goal for the first milestone being to present a list of sites on the homepage, each of which links to a view of all the experiments in that site (a list of their names or something will suffice).~~
 * Write some basic unit tests with Jasmine that deal with the basic functionality of the app so far and provide a base to build more on later when the app gets more complicated.
