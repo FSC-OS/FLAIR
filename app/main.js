@@ -7,7 +7,9 @@ var AppRouter = Backbone.Router.extend({
 
     routes:{
         "":"home",
-        "visualisation":"visualisation"
+        "visualisation":"visualisation",
+        "site/:siteid/experiment/:experimentid":"experiment",
+        "site/:siteid":"site"
     },
 
     initialize:function () {
@@ -19,7 +21,21 @@ var AppRouter = Backbone.Router.extend({
     },
 
     visualisation:function () {
-        this.changePage(new VisualisationView(), 'visualisation');
+        this.changePage(new VisualisationView({model: Sites}), 'visualisation');
+    },
+
+    site:function (siteid) {
+        this.changePage(
+            new SiteView({model: Sites.get(siteid)}),
+            'site' + siteid.toString()
+        )
+    },
+
+    experiment:function(siteid, exerciseid) {
+        this.changePage(
+            new ExperimentView({model: Sites.get(siteid).attributes.experiments.get(exerciseid)}),
+            'site' + siteid.toString() + "-exercise" + exerciseid.toString()
+        )
     },
 
     changePage:function (page, id) {
@@ -27,7 +43,13 @@ var AppRouter = Backbone.Router.extend({
         $(page.el).attr('id', id);
         page.render();
         $('body').append($(page.el));
-        $.mobile.changePage($(page.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
+        $.mobile.changePage(
+            $(page.el),
+            {
+                changeHash:false, 
+                transition: $.mobile.defaultPageTransition
+            }
+        );
     }
 
 });

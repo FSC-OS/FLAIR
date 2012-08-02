@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css"/>
 
     <!-- Templates -->
+
+    <!-- Home Page -->
     <script type="text/template" id="home">
 
         <div data-role="header">
@@ -17,13 +19,14 @@
             <p>This is the homepage</p>
             <ul id="sites" data-role="listview">
                 <% _.each(sites, function(site) { %>
-                    <li><a href="#"><%= site.location.name %></a></li>
+                    <li><a href="#site/<%= site.id %>"><%= site.location.name %></a></li>
                 <% }); %>
             </ul>
         </div>
 
     </script>
 
+    <!-- Visualisation Page -->
     <script type="text/template" id="visualisation">
 
         <div data-role="header">
@@ -37,17 +40,176 @@
 
     </script>
 
+    <!-- Site Page -->
+    <script type="text/template" id="site">
+
+        <div data-role="header">
+            <a href="#" data-icon="back" class="ui-btn-left">Home</a>
+            <h1><%= site.location.name %></h1>
+        </div>
+
+        <div data-role="content">
+            <p>This is the page for site: <%= site.id %></p>
+            <h2>Experiments:</h2>
+            <ul id="experiments" data-role="listview">
+                <% _.each(site.experiments, function(experiment) { %>
+                    <li>
+                        <a href="#site/<%= site.id %>/experiment/<%= experiment.id %>">
+                            <%= experiment.experimentType %>
+                        </a>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+
+    </script>
+
+    <!-- Experiment Page -->
+    <script type="text/template" id="experiment">
+
+        <div data-role="header">
+            <a href="#site/<%= experiment.site.id %>" data-icon="back" class="ui-btn-left">
+                <%= experiment.site.location.name %>
+            </a>
+            <h1><%= experiment.experimentType %></h1>
+        </div>
+
+        <div data-role="content">
+            <p>This is the page for experiment: <%= experiment.id %></p>
+            <h3>Experiment contents:</h3>
+            <pre>
+                <%= JSON.stringify(experiment, null, '\t') %>
+            </pre>
+        </div>
+
+    </script>
+
     <!-- Scripts -->
+    <!-- Libs -->
     <script src="lib/jquery-1.7.2.min.js"></script>
     <script src="app/jqm-config.js"></script>
     <script src="lib/jquery.mobile-1.1.1.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
+    <script src="lib/backbone-relational.js"></script>
     <script src="lib/backbone.localStorage-min.js"></script>
+
+    <!-- App -->
+    <!-- Models & Collections-->
+    <script src="app/models/experiment.js"></script>
+    <script src="app/collections/experiment.js"></script>
     <script src="app/models/site.js"></script>
     <script src="app/collections/exercise.js"></script>
+
+    <!-- Views -->
     <script src="app/views/home.js"></script>
     <script src="app/views/visualisation.js"></script>
+    <script src="app/views/site.js"></script>
+    <script src="app/views/experiment.js"></script>
+
+    <!-- Bootstrap -->
+    <script type="text/javascript">
+        // Bootstrapped Collection of sites, eventually this will be loaded
+        // from somewhere else
+
+        // Create the Exercise
+        window.Sites = new Exercise();
+
+        // Populate it with some data - this is just "in-memory" until
+        // we save it to the persistence
+        Sites.reset(
+            [{
+                id:1,
+                location: {
+                    name:"Site1"        
+                },
+                experiments: new ExperimentCollection(
+                    [{
+                        id:1,
+                        userId: "Group1",
+                        groupId: "Group1",
+                        datetime: "2012-01-01",
+                        experimentType: "Wet Width",
+                        notes: "",
+                        data: {
+                            measurement:1.9,
+                            unitOfMeasurement:"m"     
+                        }
+                    },
+                    {
+                        id:2,
+                        userId: "Group1",
+                        groupId: "Group1",
+                        datetime: "2012-01-01",
+                        experimentType: "Wetted Perimeter",
+                        notes: "",
+                        data: {
+                            measurement:2.38,
+                            unitOfMeasurement:"m"     
+                        }
+                    },
+                    {
+                        id:3,
+                        userId: "Group1",
+                        groupId: "Group1",
+                        datetime: "2012-01-01",
+                        experimentType: "Gradient",
+                        notes: "",
+                        data: {
+                            measurement:4,
+                            unitOfMeasurement:"degree"        
+                        }
+                    },
+                    {
+                        id:4,
+                        userId: "Group1",
+                        groupId: "Group1",
+                        datetime: "2012-01-01",
+                        experimentType: "Impellor Time",
+                        notes: "",
+                        data: {
+                            measurement:[75,28,20,19.5,78],
+                            unitOfMeasurement:"seconds"   
+                        }
+                    },
+                    {
+                        id:5,
+                        userId: "Group1",
+                        groupId: "Group1",
+                        datetime: "2012-01-01",
+                        experimentType: "Wet (Water) Depth",
+                        notes: "",
+                        data: {
+                            measurement:[0.2,0.25,0.11,0.1,0.1,0.09,0.06,0.12,0.02,0.03],
+                            unitOfMeasurement:"m" 
+                        }
+                    }]
+                )
+            },
+            {
+                id:2,
+                location: {
+                    name:"Site2"        
+                },
+                experiments:new ExperimentCollection([])
+            },
+            {
+                id:3,
+                location: {
+                    name:"Site3"        
+                },
+                experiments:new ExperimentCollection([])
+            }]
+        );
+
+        // Save each site into the persistence.
+        Sites.each(function(site) {
+            site.save();
+        });
+
+    </script>
+
+    <!-- Main entry point -->
     <script src="app/main.js"></script>
 </head>
 
