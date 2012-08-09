@@ -6,7 +6,7 @@ window.Experiment = Backbone.RelationalModel.extend({
 
     // Function to say whether this experiment is complete
     isComplete: function() {
-        var input = this.get('data').measurement;
+        var input = this.get("data").measurement;
         if(_.isNull(input) || _.isUndefined(input)) {
             return false;
         }

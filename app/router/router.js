@@ -27,22 +27,22 @@ window.AppRouter = Backbone.Router.extend({
     site:function (siteid) {
         this.changePage(
             new SiteView({model: Sites.get(siteid)}),
-            'site' + siteid.toString()
+            'site' + siteid
         )
     },
 
     experiment:function(siteid, exerciseid) {
         this.changePage(
-            new ExperimentView({model: Sites.get(siteid).attributes.experiments.get(exerciseid)}),
-            'site' + siteid.toString() + "-exercise" + exerciseid.toString()
+            new ExperimentView({model: Sites.get(siteid).get('experiments').get(exerciseid)}),
+            'site' + siteid + "-exercise" + exerciseid
         )
     },
 
     changePage:function (page, id) {
-        $(page.el).attr('data-role', 'page');
-        $(page.el).attr('id', id);
+        $(page.el).attr("data-role", "page");
+        $(page.el).attr("id", id);
         page.render();
-        $('body').append($(page.el));
+        $("body").append($(page.el));
         $.mobile.changePage(
             $(page.el),
             {

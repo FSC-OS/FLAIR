@@ -10,10 +10,11 @@ Developers
 The code is currently set up so that you can easily develop things by just `ctrl` + `o` opening `index.html` in your browser once you've checked it out. In the future we might need to run some kind of local server to get around cross-domain security issues in browsers, but for now this is simple and works.
 
 ### App Structure
-The app is structured using Backbone.js to divide it into Models and Views. The main entry point is `app/main.js` which:
-* Sets up the collection of "sites" I've called an "exercise" that holds all the data
-* Defines what urls are available and what happens when someone visits them
-* Starts everything up
+The app is structured using Backbone.js to divide it into Models and Views. The main entry point is `app/main.js` which starts everything up. 
+
+What urls are available and what happens when someone visits them is defined in the router in `app/router/router.js'
+
+For now, the dummy data is loaded in a `<script>` tag directly in the `index.html` file, to simulate it coming from a server.
 
 There are some settings to make this work nicely with jQuery Mobile in `app/jqm-config.js`, and the rest of the code should be fairly obviously distributed in the other folders:
 * `lib` contains the third-party libraries we need (underscore, backbone, jquery, etc)

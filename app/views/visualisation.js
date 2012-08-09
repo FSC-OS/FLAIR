@@ -5,7 +5,7 @@
 // and displays a visualisation of it
 window.VisualisationView = Backbone.View.extend({
 
-    template:_.template($('#visualisation').html()),
+    template:_.template($("#visualisation").html()),
 
     render:function (eventName) {
         $(this.el).html(this.template());

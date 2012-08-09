@@ -5,7 +5,7 @@
 // of the JSON fields within
 window.ExperimentView = Backbone.View.extend({
 
-    template:_.template($('#experiment').html()),
+    template:_.template($("#experiment").html()),
 
     render:function (eventName) {
         // TODO - how do we pass next/back links around - should

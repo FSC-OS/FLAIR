@@ -97,16 +97,16 @@ describe("Site Model", function () {
     });
 
     it("Should have an id of 1", function () {
-        expect(this.completeSite.get('id')).toEqual(1);
+        expect(this.completeSite.get("id")).toEqual(1);
     });
 
     it("Should have a location with the name \"Site1\"", function () {
-        expect(this.completeSite.get('location').name).toEqual("Site1");
+        expect(this.completeSite.get("location").name).toEqual("Site1");
     });
 
     it("Should have 5 experiments", function () {
-        expect(typeof this.completeSite.get('experiments')).toBe("object");
-        expect(this.completeSite.get('experiments').length).toEqual(5);
+        expect(typeof this.completeSite.get("experiments")).toBe("object");
+        expect(this.completeSite.get("experiments").length).toEqual(5);
     });
 
     it("Should have a relations property", function () {

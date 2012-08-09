@@ -5,7 +5,7 @@
 // of the experiments contained within
 window.SiteView = Backbone.View.extend({
 
-    template:_.template($('#site').html()),
+    template:_.template($("#site").html()),
 
     render:function (eventName) {
         $(this.el).html(this.template({site: this.model.toJSON()}));
