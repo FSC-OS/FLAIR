@@ -22,7 +22,12 @@ describe("Router", function () {
         window.ExperimentView = Backbone.View.extend({});
 
         // Stub out the models we'll use to pass to our views
-        window.Site = Backbone.RelationalModel.extend({});
+        window.Site = Backbone.RelationalModel.extend({
+            // Mock out our custom isComplete function to always return true
+            isComplete: function() {
+                return true;
+            }
+        });
 
         // Stub out the Collections our router should pass to the View
         window.Exercise = Backbone.Collection.extend({});
@@ -55,7 +60,7 @@ describe("Router", function () {
             return mockExperiments;
         });
 
-        // Mock Sites to always return a site
+        // Mock Sites to always return our mock site
         spyOn(window.Sites, "get").andCallFake(function (siteId) {
             return mockSite;
         });
@@ -167,7 +172,7 @@ describe("Router", function () {
         expect(mockExperiments.get).toHaveBeenCalledWith('1');
 
         // Expect the changePage to have been called with the right params
-        expect(this.router.changePage).toHaveBeenCalledWith(jasmine.any(Object), "site1-exercise1");
+        expect(this.router.changePage).toHaveBeenCalledWith(jasmine.any(Object), "site1-experiment1");
     });
 
 });

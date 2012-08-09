@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"">
     <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css"/>
 
+
     <!-- Templates -->
 
     <!-- Home Page -->
@@ -48,9 +49,13 @@
             <h1><%= site.location.name %></h1>
         </div>
 
-        <div data-role="content">
-            <p>This is the page for site: <%= site.id %></p>
-            <h2>Experiments:</h2>
+        <div data-role="content" id="site<%= site.id %>-content">
+            <h2><%= site.location.name %></h2>
+            <% if(complete) { %>
+                <p>You need to complete the following experiments at this site:</p>
+            <% } else { %>
+                <p>You have completed this site.</p>
+            <% } %>
             <ul id="experiments" data-role="listview">
                 <% _.each(site.experiments, function(experiment) { %>
                     <li>
@@ -68,18 +73,19 @@
     <script type="text/template" id="experiment">
 
         <div data-role="header">
-            <a href="#site/<%= experiment.site.id %>" data-icon="back" class="ui-btn-left">
+            <a href="<%= previous %>" data-icon="back" class="ui-btn-left">
                 <%= experiment.site.location.name %>
             </a>
             <h1><%= experiment.experimentType %></h1>
         </div>
 
-        <div data-role="content">
-            <p>This is the page for experiment: <%= experiment.id %></p>
-            <h3>Experiment contents:</h3>
-            <pre>
-                <%= JSON.stringify(experiment, null, '\t') %>
-            </pre>
+        <div data-role="content" id="<%= pageId %>-content">
+            <h3><%= experiment.experimentType %></h3>
+            <p><%= experiment.help %></p>
+            <div class="form">
+                <!-- The View JS will put the form here -->
+            </div>
+            <a href="<%= next %>" data-role="button" class="next">Next</a>
         </div>
 
     </script>
@@ -93,6 +99,8 @@
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone-relational.js"></script>
     <script src="lib/backbone.localStorage-min.js"></script>
+    <script src="lib/backbone-forms.min.js"></script>
+    <script src="app/templates/backbone-forms-jquery-mobile-templates.js"></script>
 
     <!-- App -->
     <!-- Models & Collections-->
@@ -133,10 +141,18 @@
                         groupId: "Group1",
                         datetime: "2012-01-01",
                         experimentType: "Wet Width",
+                        help: "The Wet Width is the width of the water at the water line",
                         notes: "",
                         data: {
                             measurement:1.9,
-                            unitOfMeasurement:"m"     
+                            unitOfMeasurement:"m"
+                        },
+                        schema: {
+                            measurement: {
+                                title: "Wet Width (m)",
+                                type: 'Number',
+                                validators: 'required',
+                            }
                         }
                     },
                     {
@@ -146,9 +162,17 @@
                         datetime: "2012-01-01",
                         experimentType: "Wetted Perimeter",
                         notes: "",
+                        help: "The wetted perimeter is the distance across the bed of the river, plus it's width across the surface",
                         data: {
                             measurement:2.38,
                             unitOfMeasurement:"m"     
+                        },
+                        schema: {
+                            measurement: {
+                                title: "Wetted Perimeter (m)",
+                                type: 'Number',
+                                validators: 'required'
+                            }
                         }
                     },
                     {
@@ -158,9 +182,17 @@
                         datetime: "2012-01-01",
                         experimentType: "Gradient",
                         notes: "",
+                        help: "Use your clinometer to measure the gradient of the surface of the water",
                         data: {
                             measurement:4,
                             unitOfMeasurement:"degree"        
+                        },
+                        schema: {
+                            measurement: {
+                                title: "Gradient (degree)",
+                                type: 'Number',
+                                validators: 'required'
+                            }
                         }
                     },
                     {
@@ -168,11 +200,43 @@
                         userId: "Group1",
                         groupId: "Group1",
                         datetime: "2012-01-01",
-                        experimentType: "Impellor Time",
+                        experimentType: "Wet (Water) Depth",
                         notes: "",
+                        help: "Next we need to measure the depth of the water at 5 points across it. Make sure you evenly space you measurements.",
                         data: {
-                            measurement:[75,28,20,19.5,78],
-                            unitOfMeasurement:"seconds"   
+                            measurement1:0.2,
+                            measurement2:0.25,
+                            measurement3:0.11,
+                            measurement4:0.1,
+                            measurement5:0.1,
+                            unitOfMeasurement:"m" 
+                        },
+                        schema: {
+                            measurement1: {
+                                title: "Wet (Water) Depth 1",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement2: {
+                                title: "Wet (Water) Depth 2",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement3: {
+                                title: "Wet (Water) Depth 3",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement4: {
+                                title: "Wet (Water) Depth 4",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement5: {
+                                title: "Wet (Water) Depth 5",
+                                type: 'Number',
+                                validators: 'required'
+                            }
                         }
                     },
                     {
@@ -180,11 +244,43 @@
                         userId: "Group1",
                         groupId: "Group1",
                         datetime: "2012-01-01",
-                        experimentType: "Wet (Water) Depth",
+                        experimentType: "Impellor Time",
                         notes: "",
+                        help: "Measure how long it takes the impellor to go from one end to the other at 5 different points across the river. Again, make sure you measure at even points.",
                         data: {
-                            measurement:[0.2,0.25,0.11,0.1,0.1,0.09,0.06,0.12,0.02,0.03],
-                            unitOfMeasurement:"m" 
+                            measurement1:75,
+                            measurement2:28,
+                            measurement3:20,
+                            measurement4:19.5,
+                            measurement5:78,
+                            unitOfMeasurement:"seconds"   
+                        },
+                        schema: {
+                            measurement1: {
+                                title: "Impellor Time 1",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement2: {
+                                title: "Impellor Time 2",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement3: {
+                                title: "Impellor Time 3",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement4: {
+                                title: "Impellor Time 4",
+                                type: 'Number',
+                                validators: 'required'
+                            },
+                            measurement5: {
+                                title: "Impellor Time 5",
+                                type: 'Number',
+                                validators: 'required'
+                            }
                         }
                     }]
                 )

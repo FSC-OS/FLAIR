@@ -1,6 +1,6 @@
 /**
 * Router
-* Override Backbone's router so that it uses jQuery Mobile's changePage() 
+* Override Backbone"s router so that it uses jQuery Mobile"s changePage() 
 * method to change pages
 */
 window.AppRouter = Backbone.Router.extend({
@@ -17,24 +17,45 @@ window.AppRouter = Backbone.Router.extend({
     },
 
     home:function () {
-        this.changePage(new HomeView({model: Sites}), 'home');
+        this.changePage(new HomeView({model: Sites}), "home");
     },
 
     visualisation:function () {
-        this.changePage(new VisualisationView({model: Sites}), 'visualisation');
+        this.changePage(new VisualisationView({model: Sites}), "visualisation");
     },
 
-    site:function (siteid) {
+    site:function (siteId) {
+        var pageId = "site" + siteId;
+        var site = Sites.get(siteId);
         this.changePage(
-            new SiteView({model: Sites.get(siteid)}),
-            'site' + siteid
+            new SiteView({
+                model: site,
+                complete: site.isComplete()
+            }),
+            pageId
         )
     },
 
-    experiment:function(siteid, exerciseid) {
+    experiment:function(siteId, experimentId) {
+        var pageId = "site" + siteId + "-experiment" + experimentId;
+        
+        var site = Sites.get(siteId);
+        var experiments = site.get('experiments');
+        var experiment = experiments.get(experimentId);
+
+        var previous = (experimentId > 1) ? "#site/" + siteId + "/experiment/" + (parseInt(experimentId) - 1) : "#site/" + siteId;
+        var next = (experimentId < experiments.length) ? "#site/" + siteId + "/experiment/" + (parseInt(experimentId) + 1) : "#site/" + siteId;
+
         this.changePage(
-            new ExperimentView({model: Sites.get(siteid).get('experiments').get(exerciseid)}),
-            'site' + siteid + "-exercise" + exerciseid
+            new ExperimentView(
+                {
+                    model: experiment,
+                    pageId: pageId,
+                    previous: previous,
+                    next: next
+                }
+            ),
+            pageId
         )
     },
 

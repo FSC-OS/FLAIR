@@ -8,10 +8,10 @@ var startApp = function() {
 
 /**
  * Start everything on document ready or deviceready depending on what system
- * type of device we're on.
+ * type of device we"re on.
  */
 if(window.Phonegap) {
-    $(document).on('deviceready', startApp);
+    $(document).on("deviceready", startApp);
 }
 else {
     $(document).ready(startApp);

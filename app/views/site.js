@@ -8,7 +8,7 @@ window.SiteView = Backbone.View.extend({
     template:_.template($("#site").html()),
 
     render:function (eventName) {
-        $(this.el).html(this.template({site: this.model.toJSON()}));
+        $(this.el).html(this.template({site: this.model.toJSON(), complete: this.options.complete}));
         return this;
     }
 });
