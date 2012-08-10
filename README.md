@@ -12,7 +12,7 @@ The code is currently set up so that you can easily develop things by just `ctrl
 ### App Structure
 The app is structured using Backbone.js to divide it into Models and Views. The main entry point is `app/main.js` which starts everything up. 
 
-What urls are available and what happens when someone visits them is defined in the router in `app/router/router.js'
+What urls are available and what happens when someone visits them is defined in the router in `app/router/router.js`
 
 For now, the dummy data is loaded in a `<script>` tag directly in the `index.html` file, to simulate it coming from a server.
 
