@@ -15,6 +15,21 @@ describe("Router", function(){
         // Set up a spy we'll use to check the router is working properly
         this.routerSpy = jasmine.createSpy();
 
+        // Stub out the Collections our router should pass to the View
+        window.Exercise = Backbone.Collection.extend({});
+
+        // Create the Sites collection we use to store the whole exercise
+        // and Mock/Spy the methods we'll call so we can control the output
+        window.Sites = new Exercise();
+
+        // Stub out the models we'll use to pass to our views
+        window.Site = Backbone.RelationalModel.extend({
+            // Mock out our custom isComplete function to always return true
+            isComplete: function() {
+                return true;
+            }
+        });
+
         // Start Backbone routing in a way that won't break when we try
         // to start it with every test, and will get us into a known
         // place to start our tests from
@@ -85,20 +100,7 @@ describe("Router", function(){
         beforeEach(function() {
             window.SiteView = Backbone.View.extend({});
 
-            // Stub out the models we'll use to pass to our views
-            window.Site = Backbone.RelationalModel.extend({
-                // Mock out our custom isComplete function to always return true
-                isComplete: function() {
-                    return true;
-                }
-            });
-
-            // Stub out the Collections our router should pass to the View
-            window.Exercise = Backbone.Collection.extend({});
-
-            // Create the Sites collection we use to store the whole exercise
-            // and Mock/Spy the methods we'll call so we can control the output
-            window.Sites = new Exercise();
+            mockSite = new Site();
 
             // Mock Sites to always return our mock site
             spyOn(window.Sites, "get").andCallFake(function (siteId) {
@@ -133,22 +135,7 @@ describe("Router", function(){
     describe("Experiment Page", function() {
         beforeEach(function() {
             window.ExperimentView = Backbone.View.extend({});
-
-            // Stub out the models we'll use to pass to our views
-            window.Site = Backbone.RelationalModel.extend({
-                // Mock out our custom isComplete function to always return true
-                isComplete: function() {
-                    return true;
-                }
-            });
-
-            // Stub out the Collections our router should pass to the View
-            window.Exercise = Backbone.Collection.extend({});
             window.ExperimentCollection = Backbone.Collection.extend({});
-
-            // Create the Sites collection we use to store the whole exercise
-            // and Mock/Spy the methods we'll call so we can control the output
-            window.Sites = new Exercise();
 
             mockExperiments = new ExperimentCollection();
             // Mock Experiments.get to always return 1 experiment with id=1
@@ -167,7 +154,6 @@ describe("Router", function(){
                 };
             });
 
-            mockSite = new Site();
             // Mock Site.get to return the mock experiments
             spyOn(mockSite, "get").andCallFake(function(attributeName) {
                 return mockExperiments;
