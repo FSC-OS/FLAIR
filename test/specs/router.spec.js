@@ -159,6 +159,7 @@ describe("Router", function(){
                 return mockExperiment;
             });
 
+            mockSite = new Site();
             // Mock Site.get to return the mock experiments
             spyOn(mockSite, "get").andCallFake(function(attributeName) {
                 return mockExperiments;

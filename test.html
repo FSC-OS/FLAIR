@@ -8,26 +8,55 @@
     <link rel="stylesheet" type="text/css" href="test/lib/jasmine-1.2.0/jasmine.css">
     <script type="text/javascript" src="test/lib/jasmine-1.2.0/jasmine.js"></script>
     <script type="text/javascript" src="test/lib/jasmine-1.2.0/jasmine-html.js"></script>
+    <script type="text/javascript" src="test/lib/jasmine-jquery-1.3.1.js"></script>
     <script type="text/javascript" src="test/lib/sinon.js"></script>
     <script src="lib/jquery-1.7.2.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone-relational.js"></script>
     <script src="lib/backbone.localStorage-min.js"></script>
+    <script src="lib/backbone-forms.min.js"></script>
+    <script src="app/templates/backbone-forms-jquery-mobile-templates.js"></script>
 
     <!-- Source files under test -->
+    
+    <!-- Templates -->
+    <!-- Experiment Page -->
+    <script type="text/template" id="experiment">
+
+        <div data-role="header">
+            <a href="<%= previous %>" data-icon="back" class="ui-btn-left">
+                <%= experiment.site.location.name %>
+            </a>
+            <h1><%= experiment.experimentType %></h1>
+        </div>
+
+        <div data-role="content" id="<%= pageId %>-content">
+            <h3><%= experiment.experimentType %></h3>
+            <p><%= experiment.help %></p>
+            <div class="form">
+                <!-- The View JS will put the form here -->
+            </div>
+            <a href="<%= next %>" data-role="button" class="next">Next</a>
+        </div>
+
+    </script>
 
     <!-- Models & Collections-->
     <script src="app/models/experiment.js"></script>
     <script src="app/collections/experiment.js"></script>
     <script src="app/models/site.js"></script>
 
+    <!-- Views -->
+    <script src="app/views/experiment.js"></script>
+
     <!-- Router -->
-    <script src="app/router/router.js"></script>    
+    <script src="app/router/router.js"></script>
 
     <!-- Specs -->
     <script type="text/javascript" src="test/specs/sitemodel.spec.js"></script>
     <script type="text/javascript" src="test/specs/experimentmodel.spec.js"></script>
+    <script type="text/javascript" src="test/specs/experimentview.spec.js"></script>
     <script type="text/javascript" src="test/specs/router.spec.js"></script>
 
     <!-- Run the specs -->
