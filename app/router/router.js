@@ -33,7 +33,7 @@ window.AppRouter = Backbone.Router.extend({
                 complete: site.isComplete()
             }),
             pageId
-        )
+        );
     },
 
     experiment:function(siteId, experimentId) {
@@ -56,7 +56,7 @@ window.AppRouter = Backbone.Router.extend({
                 }
             ),
             pageId
-        )
+        );
     },
 
     changePage:function (page, id) {

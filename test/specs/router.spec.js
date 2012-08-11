@@ -2,6 +2,7 @@ describe("Router", function(){
     // Declare variables for this spec
     var mockSite;
     var mockExperiments;
+    var mockExperiment;
 
     // Executed before every test nested below 
     beforeEach(function () {
@@ -121,7 +122,7 @@ describe("Router", function(){
         });
 
         it("Should pass the right parameters to the site page", function (){
-            // force the router to go to the homepage
+            // force the router to go to the sites page
             this.router.navigate("#site/1", true);
 
             // Expect window.Sites.get() to have been called with an id of 1
@@ -135,23 +136,27 @@ describe("Router", function(){
     describe("Experiment Page", function() {
         beforeEach(function() {
             window.ExperimentView = Backbone.View.extend({});
+            // Spy on the experiment view constructor
+            this.experimentViewSpy = sinon.spy(window, "ExperimentView");
+
             window.ExperimentCollection = Backbone.Collection.extend({});
 
             mockExperiments = new ExperimentCollection();
+            mockExperiment = {
+                id:1,
+                userId: "Group1",
+                groupId: "Group1",
+                datetime: "2012-01-01",
+                experimentType: "Wet Width",
+                notes: "",
+                data: {
+                    measurement:1.9,
+                    unitOfMeasurement:"m" 
+                }    
+            };
             // Mock Experiments.get to always return 1 experiment with id=1
             spyOn(mockExperiments, "get").andCallFake(function (experimentId){
-                return {
-                    id:1,
-                    userId: "Group1",
-                    groupId: "Group1",
-                    datetime: "2012-01-01",
-                    experimentType: "Wet Width",
-                    notes: "",
-                    data: {
-                        measurement:1.9,
-                        unitOfMeasurement:"m"     
-                    }
-                };
+                return mockExperiment;
             });
 
             // Mock Site.get to return the mock experiments
@@ -163,6 +168,11 @@ describe("Router", function(){
             spyOn(window.Sites, "get").andCallFake(function (siteId) {
                 return mockSite;
             });
+        });
+
+        afterEach(function() {
+            // Remove the spy on the ExperimentView constructor
+            window.ExperimentView.restore();
         });
         
         it("Should route to the experiment page on #site/1/experiment/1", function () {
@@ -178,7 +188,7 @@ describe("Router", function(){
         });
 
         it("Should pass the right parameters to the experiment page", function (){
-            // force the router to go to the homepage
+            // force the router to go to the experiment page
             this.router.navigate("#site/1/experiment/1", true);
 
             // Expect window.Sites.get() to have been called with an id of 1
@@ -192,6 +202,79 @@ describe("Router", function(){
 
             // Expect the changePage to have been called with the right params
             expect(this.router.changePage).toHaveBeenCalledWith(jasmine.any(Object), "site1-experiment1");
+        });
+
+        it("Should pass the right parameters to the ExperimentView constructor", function(){
+            // force the router to go to the experiment page
+            this.router.navigate("#site/1/experiment/1", true);
+
+            // Expected links for the page
+            var expectedPreviousLink = "#site/1";
+            var expectedNextLink = "#site/1";
+
+            sinon.assert.calledWith(
+                this.experimentViewSpy,
+                {
+                    model: mockExperiment,
+                    pageId: "site1-experiment1", 
+                    next: expectedNextLink, 
+                    previous: expectedPreviousLink
+                }
+            );
+        });
+
+        it("Should calculate next and previous links properly on the first page", function() {
+            // Fake the length of the experiments collection to be 3
+            mockExperiments.length = 3;
+
+            this.router.navigate("#site/1/experiment/1", true);
+            var expectedPreviousLink = "#site/1";
+            var expectedNextLink = "#site/1/experiment/2";
+            sinon.assert.calledWith(
+                this.experimentViewSpy,
+                {
+                    model: mockExperiment,
+                    pageId: "site1-experiment1", 
+                    next: expectedNextLink, 
+                    previous: expectedPreviousLink
+                }
+            );
+        });
+
+        it("Should calculate next and previous links properly on the second page", function() {
+            // Fake the length of the experiments collection to be 3
+            mockExperiments.length = 3;
+
+            this.router.navigate("#site/1/experiment/2", true);
+            var expectedPreviousLink = "#site/1/experiment/1";
+            var expectedNextLink = "#site/1/experiment/3";
+            sinon.assert.calledWith(
+                this.experimentViewSpy,
+                {
+                    model: mockExperiment,
+                    pageId: "site1-experiment2", 
+                    next: expectedNextLink, 
+                    previous: expectedPreviousLink
+                }
+            );
+        });
+
+        it("Should calculate next and previous links properly on the last page", function() {
+            // Fake the length of the experiments collection to be 3
+            mockExperiments.length = 3;
+
+            this.router.navigate("#site/1/experiment/3", true);
+            var expectedPreviousLink = "#site/1/experiment/2";
+            var expectedNextLink = "#site/1";
+            sinon.assert.calledWith(
+                this.experimentViewSpy,
+                {
+                    model: mockExperiment,
+                    pageId: "site1-experiment3", 
+                    next: expectedNextLink, 
+                    previous: expectedPreviousLink
+                }
+            );
         });
 
     });
