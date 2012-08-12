@@ -73,9 +73,7 @@
     <script type="text/template" id="experiment">
 
         <div data-role="header">
-            <a href="<%= previous %>" data-icon="back" class="ui-btn-left">
-                <%= experiment.site.location.name %>
-            </a>
+            <a href="<%= previous %>" data-icon="back" class="ui-btn-left">Back</a>
             <h1><%= experiment.experimentType %></h1>
         </div>
 
@@ -150,8 +148,8 @@
                         schema: {
                             measurement: {
                                 title: "Wet Width (m)",
-                                type: 'Number',
-                                validators: 'required',
+                                type: "Number",
+                                validators: ["required"],
                             }
                         }
                     },
@@ -162,7 +160,7 @@
                         datetime: "2012-01-01",
                         experimentType: "Wetted Perimeter",
                         notes: "",
-                        help: "The wetted perimeter is the distance across the bed of the river, plus it's width across the surface",
+                        help: "The wetted perimeter is the distance across the bed of the river plus the width across the surface",
                         data: {
                             measurement:2.38,
                             unitOfMeasurement:"m"     
@@ -170,8 +168,8 @@
                         schema: {
                             measurement: {
                                 title: "Wetted Perimeter (m)",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             }
                         }
                     },
@@ -190,8 +188,8 @@
                         schema: {
                             measurement: {
                                 title: "Gradient (degree)",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             }
                         }
                     },
@@ -214,28 +212,28 @@
                         schema: {
                             measurement1: {
                                 title: "Wet (Water) Depth 1",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement2: {
                                 title: "Wet (Water) Depth 2",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement3: {
                                 title: "Wet (Water) Depth 3",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement4: {
                                 title: "Wet (Water) Depth 4",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement5: {
                                 title: "Wet (Water) Depth 5",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             }
                         }
                     },
@@ -258,28 +256,28 @@
                         schema: {
                             measurement1: {
                                 title: "Impellor Time 1",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement2: {
                                 title: "Impellor Time 2",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement3: {
                                 title: "Impellor Time 3",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement4: {
                                 title: "Impellor Time 4",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             },
                             measurement5: {
                                 title: "Impellor Time 5",
-                                type: 'Number',
-                                validators: 'required'
+                                type: "Number",
+                                validators: ["required"]
                             }
                         }
                     }]

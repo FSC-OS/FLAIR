@@ -9,6 +9,7 @@ window.ExperimentCollection = Backbone.Collection.extend({
     // within this collection will be persisted with the Site object 
     // and the Exercise collection it resides in, this is merely a 
     // container to allow Backbone-relational to do its' magic.
+    localStorage: new Backbone.LocalStorage("flair-experiment"),
     model: Experiment
     
 });

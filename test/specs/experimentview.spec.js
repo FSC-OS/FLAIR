@@ -6,6 +6,7 @@ describe("Experiment View", function() {
 
 		mockExperiment = new Backbone.Model({
 			id:1,
+			url: "test",
             userId: "Group1",
             groupId: "Group1",
             datetime: "2012-01-01",
@@ -19,8 +20,8 @@ describe("Experiment View", function() {
             schema: {
                 measurement: {
                     title: "Wet Width (m)",
-                    type: 'Number',
-                    validators: 'required',
+                    type: "Number",
+                    validators: ["required"],
                 }
             },
             site: {
@@ -53,14 +54,49 @@ describe("Experiment View", function() {
 	});
 
 	it("Should save the model when you click the submit button", function(){
-		this.fail("Not yet implemented");
+		// Spy on the experiment model's save function
+		var experimentFormStub = sinon.stub(this.view.form, "validate");
+		experimentFormStub.returns(null);
+        var experimentModelStub = sinon.stub(mockExperiment, "save");
+        experimentModelStub.returns(true);
+
+        $(this.view.el).find("div[data-role='content']").find("a.next").trigger("vclick");
+        
+        sinon.assert.called(experimentModelStub);
+        
+        mockExperiment.save.restore();
+        this.view.form.validate.restore();
 	});
 
-	it("Should validate the model when you click the submit button", function(){
-		this.fail("Not yet implemented");
+	it("Should validate the model when you click the submit button", function() {
+		var alertStub = sinon.stub(window, "alert");
+        var experimentFormStub = sinon.stub(this.view.form, "validate");
+        experimentFormStub.returns(null);
+        var experimentModelStub = sinon.stub(mockExperiment, "save");
+        experimentModelStub.returns(true);
+        
+        $(this.view.el).find("div[data-role='content']").find("a.next").trigger("vclick");
+        
+        sinon.assert.called(experimentFormStub);
+
+        mockExperiment.save.restore();
+        this.view.form.validate.restore();
+        window.alert.restore();
 	});
 
-	it("Should alert you when the model is invalid", function(){
-		this.fail("Not yet implemented");
+	it("Should alert you when the model is invalid and not save", function(){
+        var alertStub = sinon.stub(window, "alert");
+        var experimentFormStub = sinon.stub(this.view.form, "validate");
+        // validate() returns an errors object or null
+        experimentFormStub.returns({});
+        var experimentModelStub = sinon.stub(mockExperiment, "save");
+
+        $(this.view.el).find("div[data-role='content']").find("a.next").trigger("vclick");
+
+        sinon.assert.called(alertStub);
+        sinon.assert.notCalled(experimentModelStub);
+        
+        window.alert.restore();
+        mockExperiment.save.restore();
 	});
 });
