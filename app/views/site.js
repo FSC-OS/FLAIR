@@ -11,4 +11,5 @@ window.SiteView = Backbone.View.extend({
         $(this.el).html(this.template({site: this.model.toJSON(), complete: this.options.complete}));
         return this;
     }
+
 });

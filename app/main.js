@@ -2,6 +2,8 @@
  * function to start the app
  */
 var startApp = function() {
+    window.Sites = new Exercise();
+    window.Sites.fetch();
     app = new AppRouter();
     Backbone.history.start();
 };

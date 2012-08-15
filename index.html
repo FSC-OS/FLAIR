@@ -17,12 +17,16 @@
         </div>
 
         <div data-role="content">
-            <p>This is the homepage</p>
+            <% if (sites.length > 0) { %>
+            <h3>Choose a site:</h3>
             <ul id="sites" data-role="listview">
                 <% _.each(sites, function(site) { %>
                     <li><a href="#site/<%= site.id %>"><%= site.location.name %></a></li>
                 <% }); %>
             </ul>
+            <% } %>
+            <br/>
+            <a href="#" id="bootstrap" data-role="button">Load default sites</a>
         </div>
 
     </script>
@@ -96,11 +100,16 @@
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone-relational.js"></script>
-    <script src="lib/backbone.localStorage-min.js"></script>
     <script src="lib/backbone-forms.min.js"></script>
-    <script src="app/templates/backbone-forms-jquery-mobile-templates.js"></script>
 
     <!-- App -->
+
+    <!-- Custom templates for backbone-forms -->
+    <script src="app/templates/backbone-forms-jquery-mobile-templates.js"></script>
+
+    <!-- Custom Backbone.sync -->
+    <script src="app/custom-sync.js"></script>
+
     <!-- Models & Collections-->
     <script src="app/models/experiment.js"></script>
     <script src="app/collections/experiment.js"></script>
@@ -117,194 +126,7 @@
     <script src="app/router/router.js"></script>
 
     <!-- Bootstrap -->
-    <script type="text/javascript">
-        // Bootstrapped Collection of sites, eventually this will be loaded
-        // from somewhere else
-
-        // Create the Exercise
-        window.Sites = new Exercise();
-
-        // Populate it with some data - this is just "in-memory" until
-        // we save it to the persistence
-        Sites.reset(
-            [{
-                id:1,
-                location: {
-                    name:"Site1"        
-                },
-                experiments: new ExperimentCollection(
-                    [{
-                        id:1,
-                        userId: "Group1",
-                        groupId: "Group1",
-                        datetime: "2012-01-01",
-                        experimentType: "Wet Width",
-                        help: "The Wet Width is the width of the water at the water line",
-                        notes: "",
-                        data: {
-                            measurement:1.9,
-                            unitOfMeasurement:"m"
-                        },
-                        schema: {
-                            measurement: {
-                                title: "Wet Width (m)",
-                                type: "Number",
-                                validators: ["required"],
-                            }
-                        }
-                    },
-                    {
-                        id:2,
-                        userId: "Group1",
-                        groupId: "Group1",
-                        datetime: "2012-01-01",
-                        experimentType: "Wetted Perimeter",
-                        notes: "",
-                        help: "The wetted perimeter is the distance across the bed of the river plus the width across the surface",
-                        data: {
-                            measurement:2.38,
-                            unitOfMeasurement:"m"     
-                        },
-                        schema: {
-                            measurement: {
-                                title: "Wetted Perimeter (m)",
-                                type: "Number",
-                                validators: ["required"]
-                            }
-                        }
-                    },
-                    {
-                        id:3,
-                        userId: "Group1",
-                        groupId: "Group1",
-                        datetime: "2012-01-01",
-                        experimentType: "Gradient",
-                        notes: "",
-                        help: "Use your clinometer to measure the gradient of the surface of the water",
-                        data: {
-                            measurement:4,
-                            unitOfMeasurement:"degree"        
-                        },
-                        schema: {
-                            measurement: {
-                                title: "Gradient (degree)",
-                                type: "Number",
-                                validators: ["required"]
-                            }
-                        }
-                    },
-                    {
-                        id:4,
-                        userId: "Group1",
-                        groupId: "Group1",
-                        datetime: "2012-01-01",
-                        experimentType: "Wet (Water) Depth",
-                        notes: "",
-                        help: "Next we need to measure the depth of the water at 5 points across it. Make sure you evenly space you measurements.",
-                        data: {
-                            measurement1:0.2,
-                            measurement2:0.25,
-                            measurement3:0.11,
-                            measurement4:0.1,
-                            measurement5:0.1,
-                            unitOfMeasurement:"m" 
-                        },
-                        schema: {
-                            measurement1: {
-                                title: "Wet (Water) Depth 1",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement2: {
-                                title: "Wet (Water) Depth 2",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement3: {
-                                title: "Wet (Water) Depth 3",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement4: {
-                                title: "Wet (Water) Depth 4",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement5: {
-                                title: "Wet (Water) Depth 5",
-                                type: "Number",
-                                validators: ["required"]
-                            }
-                        }
-                    },
-                    {
-                        id:5,
-                        userId: "Group1",
-                        groupId: "Group1",
-                        datetime: "2012-01-01",
-                        experimentType: "Impellor Time",
-                        notes: "",
-                        help: "Measure how long it takes the impellor to go from one end to the other at 5 different points across the river. Again, make sure you measure at even points.",
-                        data: {
-                            measurement1:75,
-                            measurement2:28,
-                            measurement3:20,
-                            measurement4:19.5,
-                            measurement5:78,
-                            unitOfMeasurement:"seconds"   
-                        },
-                        schema: {
-                            measurement1: {
-                                title: "Impellor Time 1",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement2: {
-                                title: "Impellor Time 2",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement3: {
-                                title: "Impellor Time 3",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement4: {
-                                title: "Impellor Time 4",
-                                type: "Number",
-                                validators: ["required"]
-                            },
-                            measurement5: {
-                                title: "Impellor Time 5",
-                                type: "Number",
-                                validators: ["required"]
-                            }
-                        }
-                    }]
-                )
-            },
-            {
-                id:2,
-                location: {
-                    name:"Site2"        
-                },
-                experiments:new ExperimentCollection([])
-            },
-            {
-                id:3,
-                location: {
-                    name:"Site3"        
-                },
-                experiments:new ExperimentCollection([])
-            }]
-        );
-
-        // Save each site into the persistence.
-        Sites.each(function(site) {
-            site.save();
-        });
-
-    </script>
+    <script src="app/bootstrap.js"></script>
 
     <!-- Main entry point -->
     <script src="app/main.js"></script>

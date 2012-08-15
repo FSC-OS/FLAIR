@@ -43,8 +43,8 @@ window.AppRouter = Backbone.Router.extend({
         var experiments = site.get('experiments');
         var experiment = experiments.get(experimentId);
 
-        var previous = (experimentId > 1) ? "#site/" + siteId + "/experiment/" + (parseInt(experimentId) - 1) : "#site/" + siteId;
-        var next = (experimentId < experiments.length) ? "#site/" + siteId + "/experiment/" + (parseInt(experimentId) + 1) : "#site/" + siteId;
+        var previous = (experimentId > 0) ? "#site/" + siteId + "/experiment/" + (parseInt(experimentId) - 1) : "#site/" + siteId;
+        var next = (experimentId < (experiments.length - 1)) ? "#site/" + siteId + "/experiment/" + (parseInt(experimentId) + 1) : "#site/" + siteId;
 
         this.changePage(
             new ExperimentView(

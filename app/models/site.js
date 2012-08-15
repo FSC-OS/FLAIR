@@ -11,10 +11,6 @@ window.Site = Backbone.RelationalModel.extend({
         collectionType: "ExperimentCollection",
         reverseRelation: {
             key: "site",
-            // Include the whole of each Experiment in the Site"s JSON.
-            // We need to do this so that we can serialise our
-            // collection of Sites and get all the data in one go
-            includeInJSON: true
         }
     }],
 
