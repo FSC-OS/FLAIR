@@ -8,7 +8,10 @@ window.SiteView = Backbone.View.extend({
     template:_.template($("#site").html()),
 
     render:function (eventName) {
-        $(this.el).html(this.template({site: this.model.toJSON()}));
+    	// Sort the models by their order property
+    	var sortedModel = this.model.toJSON();
+    	sortedModel.experiments = _.sortBy(sortedModel.experiments, "order");
+        $(this.el).html(this.template({site: sortedModel}));
         return this;
     }
 

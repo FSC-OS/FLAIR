@@ -24,10 +24,10 @@ _.extend(Backbone.FlairStorage.prototype, {
 		var key = this.name + "-site-";
 		switch(type) {
 			case "site":
-				key += model.id;
+				key += model.id.toString();
 				break;
 			case "experiment":
-				key += model.get("site").id;
+				key += model.get("site").id.toString();
 				break;
 		}
 		return key;
