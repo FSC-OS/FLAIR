@@ -9,17 +9,18 @@ A live example of the app that you can try is running at:
 
 http://flair-stevenday.rhcloud.com/static/prototype/index.html
 
-Currently this only allows you to put data in for one site, to keep things simple, but it is fully functional (or should be) in that respect. There's no visualisation yet either. Please do give it a go though, especially in iOS devices, and see if you can break anything.
+Currently this only has two sites to keep it simple, and the visualisation leaves a bit to be desired. Please do give it a go though, especially in iOS devices, and see if you can break anything.
 
 ### Instructions
-On you first visit you'll need to click the `Load default sites` button, which simulates loading an exercise configuration from somewhere. Then you'll see a site which you can navigate in a similar way to the previous version of the app. Then only real difference is the site page I've added, so that you can see all the experiments at each site, and the fact that I've broken the 'experiments' up a bit, to illustrate that they're configurable now.
+On you first visit you'll need to click the `Load default sites` button, which simulates loading an exercise configuration from somewhere. Then you'll see two sites which you can navigate in a similar way to the previous version of the app. Then only real difference is the site page I've added, so that you can see all the experiments at each site, and the fact that I've broken the 'experiments' up a bit, to illustrate that they're configurable now.
 
 Configurability
 ---------------
-As an example of how it's now possible to configure the app to do almost anything, here are some examples of the code that it's currently using to load in the experiments:
+As an example of how it's now possible to configure the app to do different experiments, here are some examples of the code that it's currently using to load in the experiments:
 
 		{
             id:0,
+            order:0,
             userId: "Group1",
             groupId: "Group1",
             datetime: "2012-01-01",
@@ -60,9 +61,10 @@ There are some settings to make this work nicely with jQuery Mobile in `app/jqm-
 * `app/views` contains the view classes
 * `app/models` contains the model classes
 * `app/collections` contains the collection classes which hold collections of models
-* `test` contains a set of unit tests and the Jasmine library to run them
+* `app/router` contains the router which wires up the views to urls
+* `test` contains a set of unit tests and the Jasmine library to run them, open `test.html` to run them
 
 For the moment I've inlined all the templates which the views use into `index.html`, because they're pretty simple and loading them in from some other file would mean we _have_ to have a local web server running to avoid cross-domain issues, which is an additional barrier to entry for people wanting to try this out/test things.
 
 ### Testing
-There are some Jasmine unit tests included in the `test` folder, and you can run them by simply opening `test.html` - the page you see gives you the test results. These are basic for now, but provide a base to add to when we have something more complicated to test.
+There are some Jasmine unit tests included in the `test` folder, and you can run them by simply opening `test.html` - the page you see gives you the test results.
