@@ -3,6 +3,45 @@ FLAIR
 
 Open Source Fieldwork Tool
 
+Live Example
+------------
+A live example of the app that you can try is running at:
+
+http://flair-stevenday.rhcloud.com/static/prototype/index.html
+
+Currently this only allows you to put data in for one site, to keep things simple, but it is fully functional (or should be) in that respect. There's no visualisation yet either. Please do give it a go though, especially in iOS devices, and see if you can break anything.
+
+### Instructions
+On you first visit you'll need to click the `Load default sites` button, which simulates loading an exercise configuration from somewhere. Then you'll see a site which you can navigate in a similar way to the previous version of the app. Then only real difference is the site page I've added, so that you can see all the experiments at each site, and the fact that I've broken the 'experiments' up a bit, to illustrate that they're configurable now.
+
+Configurability
+---------------
+As an example of how it's now possible to configure the app to do almost anything, here are some examples of the code that it's currently using to load in the experiments:
+
+		{
+            id:0,
+            userId: "Group1",
+            groupId: "Group1",
+            datetime: "2012-01-01",
+            experimentType: "Wet Width",
+            help: "The Wet Width is the width of the water at the water line",
+            notes: "",
+            data: {
+                measurement:null,
+                unitOfMeasurement:"m"
+            },
+            schema: {
+                measurement: {
+                    title: "Wet Width (m)",
+                    type: "Number",
+                    validators: ["required"],
+                }
+            },
+            site:0
+        }
+
+The main point of interest is the `data` object, and the `schema` object, which tell it what questions we have, and how to present a form for them. The system we're using can understand numbers, text, lists, checkboxes and and a few other nifty things, so it's quite flexible, and it's very simple to change.
+
 Developers
 ----------
 
