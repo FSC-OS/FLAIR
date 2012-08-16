@@ -21,24 +21,24 @@ _.extend(Backbone.FlairStorage.prototype, {
 
 	getKey: function(model, type) {
 		// Get the right key for this type of model
-		var key = this.name;
+		var key = this.name + "-site-";
 		switch(type) {
 			case "site":
-				key += "-site-" + model.id;
+				key += model.id;
 				break;
 			case "experiment":
-				key += "-site-" + model.get("site").id;
+				key += model.get("site").id;
 				break;
 		}
 		return key;
 	},
 
 	read: function(model, type, key) {
+    var site = JSON.parse(window.localStorage.getItem(key));
 		switch(type) {
 			case "site":
-				return window.localStorage.getItem(key);
+				return site;
 			case "experiment":
-				var site = JSON.parse(window.localStorage.getItem(key));
 				return site.experiments[model.id];
 		}
 	},
@@ -46,9 +46,10 @@ _.extend(Backbone.FlairStorage.prototype, {
 	// Load all sites
 	readAll: function() {
 		var i = 0;
+    var key = this.name + "-site-";
 		var sites = [];		
-		while (localStorage.getItem(name + "-site-" + i) !== null) {
-			sites.push(localStorage.getItem(name + "-site-" + i));
+		while (localStorage.getItem(key + i) !== null) {
+			sites.push(localStorage.getItem(key + i));
 			i++;
 		}
 		return sites;
@@ -83,13 +84,17 @@ Backbone.sync = function(method, model, options) {
 
 		switch (method) {
 			case "read":    
-				if(model.id != undefined) {
+				if(typeof model.id === "undefined") {
+          // A collection
 					resp = store.readAll();
 				}
-				resp = store.read(model, type, key);
+        else  {
+          // A model
+				  resp = store.read(model, type, key);
+        }
 				break;
 			case "create": 
-				// We don't "create" as such, as we already have id's
+				// We don't "create" as such, as we already have id's so it's an update
 				resp = store.update(model, type, key);
 				break;
 			case "update":
