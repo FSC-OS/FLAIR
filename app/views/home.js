@@ -5,13 +5,13 @@
 window.HomeView = Backbone.View.extend({
 
   initialize: function() {
-    this.model.on('change', this.render, this);
+    this.collection.on('change', this.render, this);
  	}, 
 
   template: _.template($("#home").html()),
   
   render: function() {
-    $(this.el).html(this.template({sites: this.model.toJSON()}));
+    $(this.el).html(this.template({sites: this.collection.toJSON()}));
     return this;
   },
   
@@ -20,6 +20,6 @@ window.HomeView = Backbone.View.extend({
   },
   
   bootstrap: function() {
-  	window.bootStrapSites();
+  	window.bootStrapSites(this.collection);
   }
 });
