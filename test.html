@@ -14,7 +14,6 @@
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone-relational.js"></script>
-    <script src="lib/backbone.localStorage-min.js"></script>
     <script src="lib/backbone-forms.min.js"></script>
     <script src="app/templates/backbone-forms-jquery-mobile-templates.js"></script>
 
@@ -25,9 +24,7 @@
     <script type="text/template" id="experiment">
 
         <div data-role="header">
-            <a href="<%= previous %>" data-icon="back" class="ui-btn-left">
-                <%= experiment.site.location.name %>
-            </a>
+            <a href="<%= previous %>" data-icon="back" class="ui-btn-left">Back</a>
             <h1><%= experiment.experimentType %></h1>
         </div>
 
@@ -41,6 +38,9 @@
         </div>
 
     </script>
+
+    <!-- Custom Backbone.sync -->
+    <script src="app/custom-sync.js"></script>
 
     <!-- Models & Collections-->
     <script src="app/models/experiment.js"></script>

@@ -55,11 +55,7 @@
 
         <div data-role="content" id="site<%= site.id %>-content">
             <h2><%= site.location.name %></h2>
-            <% if(complete) { %>
-                <p>You need to complete the following experiments at this site:</p>
-            <% } else { %>
-                <p>You have completed this site.</p>
-            <% } %>
+            <p>You need to complete the following experiments at this site:</p>
             <ul id="experiments" data-role="listview">
                 <% _.each(site.experiments, function(experiment) { %>
                     <li>

@@ -21,7 +21,7 @@ function bootStrapSites(collection) {
                     help: "The Wet Width is the width of the water at the water line",
                     notes: "",
                     data: {
-                        measurement:0,
+                        measurement:null,
                         unitOfMeasurement:"m"
                     },
                     schema: {
@@ -42,7 +42,7 @@ function bootStrapSites(collection) {
                     notes: "",
                     help: "The wetted perimeter is the distance across the bed of the river plus the width across the surface",
                     data: {
-                        measurement:0,
+                        measurement:null,
                         unitOfMeasurement:"m"     
                     },
                     schema: {

@@ -27,13 +27,7 @@ window.AppRouter = Backbone.Router.extend({
     site:function (siteId) {
         var pageId = "site" + siteId;
         var site = Sites.get(siteId);
-        this.changePage(
-            new SiteView({
-                model: site,
-                complete: site.isComplete()
-            }),
-            pageId
-        );
+        this.changePage(new SiteView({model: site}), pageId);
     },
 
     experiment:function(siteId, experimentId) {

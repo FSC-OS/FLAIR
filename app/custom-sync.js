@@ -38,8 +38,10 @@ _.extend(Backbone.FlairStorage.prototype, {
 		switch(type) {
 			case "site":
 				return site;
+				break;
 			case "experiment":
 				return site.experiments[model.id];
+				break;
 		}
 	},
 
@@ -59,10 +61,12 @@ _.extend(Backbone.FlairStorage.prototype, {
 		switch(type) {
 			case "site":
 				window.localStorage.setItem(key, JSON.stringify(model));
+				break;
 			case "experiment":
 				var site = JSON.parse(window.localStorage.getItem(key));
 				site.experiments[model.id] = model;
 				window.localStorage.setItem(key, JSON.stringify(site));
+				break;
 		}
 		// Nothing happened to it, but we return it anyway because that's
 		// the Backbone custom

@@ -143,7 +143,7 @@ describe("Router", function(){
 
             mockExperiments = new ExperimentCollection();
             mockExperiment = {
-                id:1,
+                id:0,
                 userId: "Group1",
                 groupId: "Group1",
                 datetime: "2012-01-01",
@@ -176,12 +176,12 @@ describe("Router", function(){
             window.ExperimentView.restore();
         });
         
-        it("Should route to the experiment page on #site/1/experiment/1", function () {
+        it("Should route to the experiment page on #site/1/experiment/0", function () {
             // Set our spy to spy on the router event we're interested in
             this.router.bind("route:experiment", this.routerSpy);
 
-            // force the router to go to sites/1/experiment/1
-            this.router.navigate("#site/1/experiment/1", true);
+            // force the router to go to sites/1/experiment/0
+            this.router.navigate("#site/1/experiment/0", true);
 
             // Expect the sites event to have been called once
             expect(this.routerSpy).toHaveBeenCalled();
@@ -190,7 +190,7 @@ describe("Router", function(){
 
         it("Should pass the right parameters to the experiment page", function (){
             // force the router to go to the experiment page
-            this.router.navigate("#site/1/experiment/1", true);
+            this.router.navigate("#site/1/experiment/0", true);
 
             // Expect window.Sites.get() to have been called with an id of 1
             expect(window.Sites.get).toHaveBeenCalledWith('1');
@@ -198,16 +198,16 @@ describe("Router", function(){
             // Expect mockSite.get() to have been called with 'experiments'
             expect(mockSite.get).toHaveBeenCalledWith('experiments');
 
-            // Expect mockExperiments.get() to have been called with an id of 1
-            expect(mockExperiments.get).toHaveBeenCalledWith('1');
+            // Expect mockExperiments.get() to have been called with an id of 0
+            expect(mockExperiments.get).toHaveBeenCalledWith('0');
 
             // Expect the changePage to have been called with the right params
-            expect(this.router.changePage).toHaveBeenCalledWith(jasmine.any(Object), "site1-experiment1");
+            expect(this.router.changePage).toHaveBeenCalledWith(jasmine.any(Object), "site1-experiment0");
         });
 
         it("Should pass the right parameters to the ExperimentView constructor", function(){
             // force the router to go to the experiment page
-            this.router.navigate("#site/1/experiment/1", true);
+            this.router.navigate("#site/1/experiment/0", true);
 
             // Expected links for the page
             var expectedPreviousLink = "#site/1";
@@ -217,7 +217,7 @@ describe("Router", function(){
                 this.experimentViewSpy,
                 {
                     model: mockExperiment,
-                    pageId: "site1-experiment1", 
+                    pageId: "site1-experiment0", 
                     next: expectedNextLink, 
                     previous: expectedPreviousLink
                 }
@@ -228,8 +228,26 @@ describe("Router", function(){
             // Fake the length of the experiments collection to be 3
             mockExperiments.length = 3;
 
-            this.router.navigate("#site/1/experiment/1", true);
+            this.router.navigate("#site/1/experiment/0", true);
             var expectedPreviousLink = "#site/1";
+            var expectedNextLink = "#site/1/experiment/1";
+            sinon.assert.calledWith(
+                this.experimentViewSpy,
+                {
+                    model: mockExperiment,
+                    pageId: "site1-experiment0", 
+                    next: expectedNextLink, 
+                    previous: expectedPreviousLink
+                }
+            );
+        });
+
+        it("Should calculate next and previous links properly on the second page", function() {
+            // Fake the length of the experiments collection to be 3
+            mockExperiments.length = 3;
+
+            this.router.navigate("#site/1/experiment/1", true);
+            var expectedPreviousLink = "#site/1/experiment/0";
             var expectedNextLink = "#site/1/experiment/2";
             sinon.assert.calledWith(
                 this.experimentViewSpy,
@@ -242,36 +260,18 @@ describe("Router", function(){
             );
         });
 
-        it("Should calculate next and previous links properly on the second page", function() {
+        it("Should calculate next and previous links properly on the last page", function() {
             // Fake the length of the experiments collection to be 3
             mockExperiments.length = 3;
 
             this.router.navigate("#site/1/experiment/2", true);
             var expectedPreviousLink = "#site/1/experiment/1";
-            var expectedNextLink = "#site/1/experiment/3";
-            sinon.assert.calledWith(
-                this.experimentViewSpy,
-                {
-                    model: mockExperiment,
-                    pageId: "site1-experiment2", 
-                    next: expectedNextLink, 
-                    previous: expectedPreviousLink
-                }
-            );
-        });
-
-        it("Should calculate next and previous links properly on the last page", function() {
-            // Fake the length of the experiments collection to be 3
-            mockExperiments.length = 3;
-
-            this.router.navigate("#site/1/experiment/3", true);
-            var expectedPreviousLink = "#site/1/experiment/2";
             var expectedNextLink = "#site/1";
             sinon.assert.calledWith(
                 this.experimentViewSpy,
                 {
                     model: mockExperiment,
-                    pageId: "site1-experiment3", 
+                    pageId: "site1-experiment2", 
                     next: expectedNextLink, 
                     previous: expectedPreviousLink
                 }
