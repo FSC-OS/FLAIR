@@ -2,14 +2,10 @@
 // from somewhere else, but this allows us to click a button and get
 // sites just like that.
 
-function bootStrapSites() {
-    // Create the Exercise
-    window.Sites = new Exercise();
-
-
+function bootStrapSites(collection) {
     // Populate it with some data - this is just "in-memory" until
     // we save it to the persistence
-    window.Sites.reset(
+    collection.reset(
         [{
             id:0,
             location: {
@@ -174,7 +170,7 @@ function bootStrapSites() {
     );
 
     // Save each site into the persistence.
-    Sites.each(function(site) {
+    collection.each(function(site) {
         site.save();
     });
 }
