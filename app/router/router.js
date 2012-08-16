@@ -17,11 +17,11 @@ window.AppRouter = Backbone.Router.extend({
     },
 
     home:function () {
-        this.changePage(new HomeView({model: Sites}), "home");
+        this.changePage(new HomeView({collection: window.Sites}), "home");
     },
 
     visualisation:function () {
-        this.changePage(new VisualisationView({model: Sites}), "visualisation");
+        this.changePage(new VisualisationView({collection: window.Sites}), "visualisation");
     },
 
     site:function (siteId) {
