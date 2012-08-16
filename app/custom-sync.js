@@ -46,10 +46,10 @@ _.extend(Backbone.FlairStorage.prototype, {
 	// Load all sites
 	readAll: function() {
 		var i = 0;
-    var key = this.name + "-site-";
+    	var key = this.name + "-site-";
 		var sites = [];		
 		while (localStorage.getItem(key + i) !== null) {
-			sites.push(localStorage.getItem(key + i));
+			sites.push(JSON.parse(localStorage.getItem(key + i)));
 			i++;
 		}
 		return sites;
@@ -75,34 +75,32 @@ window.FlairStore = new Backbone.FlairStorage("flair");
 
 Backbone.sync = function(method, model, options) {
 
-	var resp, key;
+	var resp, key, type;
 	var store = window.FlairStore;
-	var type = store.getType(model);
 
-	if(type !== null) {
-		key = store.getKey(model, type);
-
-		switch (method) {
-			case "read":    
-				if(typeof model.id === "undefined") {
-          // A collection
-					resp = store.readAll();
-				}
-        else  {
-          // A model
-				  resp = store.read(model, type, key);
-        }
-				break;
-			case "create": 
-				// We don't "create" as such, as we already have id's so it's an update
-				resp = store.update(model, type, key);
-				break;
-			case "update":
-				resp = store.update(model, type, key);
-				break;
-			case "delete":
-				// We don't do delete at all
-				break;
+	if(typeof model.id === "undefined") {
+        // A collection
+		resp = store.readAll();
+	}
+	else {
+		type = store.getType(model);
+	 	if(type !== null) {
+			key = store.getKey(model, type);
+			switch (method) {
+				case "read":    
+					 resp = store.read(model, type, key);
+					break;
+				case "create": 
+					// We don't "create" as such, as we already have id's so it's an update
+					resp = store.update(model, type, key);
+					break;
+				case "update":
+					resp = store.update(model, type, key);
+					break;
+				case "delete":
+					// We don't do delete at all
+					break;
+			}
 		}
 	}
 

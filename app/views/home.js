@@ -4,10 +4,6 @@
 // The home view is the top level piece of UI of our app
 window.HomeView = Backbone.View.extend({
 
-  initialize: function() {
-    this.collection.on('change', this.render, this);
- 	}, 
-
   template: _.template($("#home").html()),
   
   render: function() {
@@ -21,5 +17,9 @@ window.HomeView = Backbone.View.extend({
   
   bootstrap: function() {
   	window.bootStrapSites(this.collection);
+    // TODO - this is very bad, but if we don't actually "changePage"
+    // I can't make jQuery mobile reload the styling on all the elements
+    // we need it to, so the page is broken.
+    app.home();
   }
 });
