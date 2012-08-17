@@ -32,6 +32,9 @@ function bootStrapSites(collection) {
                             validators: ["required"],
                         }
                     },
+                    visualisation: {
+                        axis: "y"
+                    },
                     site:0
                 },
                 {
@@ -84,43 +87,23 @@ function bootStrapSites(collection) {
                     userId: "Group1",
                     groupId: "Group1",
                     datetime: "2012-01-01",
-                    experimentType: "Wet (Water) Depth",
+                    experimentType: "Wet Water Depth",
                     notes: "",
                     help: "Next we need to measure the depth of the water at 5 points across it. Make sure you evenly space you measurements.",
                     data: {
-                        measurement1:0,
-                        measurement2:0,
-                        measurement3:0,
-                        measurement4:0,
-                        measurement5:0,
+                        measurement:[0,0,0,0,0],
                         unitOfMeasurement:"m" 
                     },
                     schema: {
-                        measurement1: {
-                            title: "Wet (Water) Depth 1",
-                            type: "Number",
-                            validators: ["required"]
+                        measurement: {
+                            title: "Wet Water Depth",
+                            type: "List",
+                            validators: ["required"],
+                            listType: "Number"
                         },
-                        measurement2: {
-                            title: "Wet (Water) Depth 2",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement3: {
-                            title: "Wet (Water) Depth 3",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement4: {
-                            title: "Wet (Water) Depth 4",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement5: {
-                            title: "Wet (Water) Depth 5",
-                            type: "Number",
-                            validators: ["required"]
-                        }
+                    },
+                    visualisation: {
+                        axis: "x"
                     },
                     site:0
                 },
@@ -134,39 +117,16 @@ function bootStrapSites(collection) {
                     notes: "",
                     help: "Measure how long it takes the impellor to go from one end to the other at 5 different points across the river. Again, make sure you measure at even points.",
                     data: {
-                        measurement1:0,
-                        measurement2:0,
-                        measurement3:0,
-                        measurement4:0,
-                        measurement5:0,
-                        unitOfMeasurement:"seconds"   
+                        measurement:[0,0,0,0,0],
+                        unitOfMeasurement:"s" 
                     },
                     schema: {
-                        measurement1: {
-                            title: "Impellor Time 1",
-                            type: "Number",
-                            validators: ["required"]
+                        measurement: {
+                            title: "Impellor time (secs)",
+                            type: "List",
+                            validators: ["required"],
+                            listType: "Number"
                         },
-                        measurement2: {
-                            title: "Impellor Time 2",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement3: {
-                            title: "Impellor Time 3",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement4: {
-                            title: "Impellor Time 4",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement5: {
-                            title: "Impellor Time 5",
-                            type: "Number",
-                            validators: ["required"]
-                        }
                     },
                     site:0
                 }]
@@ -197,6 +157,9 @@ function bootStrapSites(collection) {
                             type: "Number",
                             validators: ["required"],
                         }
+                    },
+                    visualisation: {
+                        axis: "y"
                     },
                     site:1
                 },
@@ -250,43 +213,23 @@ function bootStrapSites(collection) {
                     userId: "Group1",
                     groupId: "Group1",
                     datetime: "2012-01-01",
-                    experimentType: "Wet (Water) Depth",
+                    experimentType: "Wet Water Depth",
                     notes: "",
                     help: "Next we need to measure the depth of the water at 5 points across it. Make sure you evenly space you measurements.",
                     data: {
-                        measurement1:0,
-                        measurement2:0,
-                        measurement3:0,
-                        measurement4:0,
-                        measurement5:0,
+                        measurement:[0,0,0,0,0],
                         unitOfMeasurement:"m" 
                     },
                     schema: {
-                        measurement1: {
-                            title: "Wet (Water) Depth 1",
-                            type: "Number",
-                            validators: ["required"]
+                        measurement: {
+                            title: "Wet Water Depth",
+                            type: "List",
+                            validators: ["required"],
+                            listType: "Number"
                         },
-                        measurement2: {
-                            title: "Wet (Water) Depth 2",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement3: {
-                            title: "Wet (Water) Depth 3",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement4: {
-                            title: "Wet (Water) Depth 4",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement5: {
-                            title: "Wet (Water) Depth 5",
-                            type: "Number",
-                            validators: ["required"]
-                        }
+                    },
+                    visualisation: {
+                        axis: "x"
                     },
                     site:1
                 },
@@ -300,39 +243,16 @@ function bootStrapSites(collection) {
                     notes: "",
                     help: "Measure how long it takes the impellor to go from one end to the other at 5 different points across the river. Again, make sure you measure at even points.",
                     data: {
-                        measurement1:0,
-                        measurement2:0,
-                        measurement3:0,
-                        measurement4:0,
-                        measurement5:0,
-                        unitOfMeasurement:"seconds"   
+                        measurement:[0,0,0,0,0],
+                        unitOfMeasurement:"s" 
                     },
                     schema: {
-                        measurement1: {
-                            title: "Impellor Time 1",
-                            type: "Number",
-                            validators: ["required"]
+                        measurement: {
+                            title: "Impellor time (secs)",
+                            type: "List",
+                            validators: ["required"],
+                            listType: "Number"
                         },
-                        measurement2: {
-                            title: "Impellor Time 2",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement3: {
-                            title: "Impellor Time 3",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement4: {
-                            title: "Impellor Time 4",
-                            type: "Number",
-                            validators: ["required"]
-                        },
-                        measurement5: {
-                            title: "Impellor Time 5",
-                            type: "Number",
-                            validators: ["required"]
-                        }
                     },
                     site:1
                 }]

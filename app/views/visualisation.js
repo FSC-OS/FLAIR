@@ -9,47 +9,44 @@ window.VisualisationView = Backbone.View.extend({
 
     render:function (eventName) {
         
+        // Render the basic template
         $(this.el).html(this.template({sites: this.collection.toJSON()}));
 
+        // Extract the data that is supposed to be charted from each site
         var that = this;
         var charts = [];
-        var max = 0;
-        var chartDivIds = [];
+        var chartIds = [];
         _.each(this.collection.models, function(site) {
         	var chart = {};
             var chartId = "site-" + site.id + "-chart";
-            chartDivIds.push(chartId);
-           	var experiments = site.get("experiments");
-           	var wetWidthModel = experiments.models[0];
-           	var depthModel = experiments.models[3];
-            var wetWidth = wetWidthModel.get("data").measurement;
-            max = wetWidth > max ? wetWidth : max;
-            var depths = [
-                depthModel.get("data").measurement1,
-                depthModel.get("data").measurement2,
-                depthModel.get("data").measurement3,
-                depthModel.get("data").measurement4,
-                depthModel.get("data").measurement5,
-            ];
+
+            // Store the data for this chart
             chart.id = chartId;
-            chart.wetWidth = wetWidth;
-            chart.depths = depths;
+            // Find the experiment models which are supposed to be visualised
+            chart.models = _.filter(site.get("experiments").models, function(experiment) {
+                return !_.isUndefined(experiment.attributes.visualisation);
+            });        
             charts.push(chart);
+            chartIds.push(chartId);
         });
 
-        _.each(chartDivIds, function(chartId){
+        // Build a DOM element for each of the charts we've found data for
+        _.each(chartIds, function(chartId){
         	var chartDiv = that.make("div", {"id": chartId});
         	$(that.el).find("div[data-role='content']").append(chartDiv);
         });
 
-        setTimeout(function () {that.renderCharts(charts, max)}, 0);
+        // Call the charting function
+        // This is a bit hacky, but otherwise the chart won't have a div to render
+        // to, and so will fail. This makes it happen after all the real rendering
+        // has taken place. A better solution will require a charting lib that
+        // doesn't need this, which I couldn't find in the time.
+        setTimeout(function () {that.renderCharts(charts)}, 0);
 
         return this;
     },
 
-    renderCharts: function(charts, max) {
-    	_.each(charts, function(chart){
-    		createCrossSection(chart.id, chart.wetWidth, chart.depths, max);
-    	});
+    renderCharts: function(charts) {
+    	visualise(charts);
     }
 });

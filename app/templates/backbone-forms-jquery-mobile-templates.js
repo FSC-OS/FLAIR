@@ -39,6 +39,21 @@
         {{editor}}\
         <div class="help-block">{{help}}</div>\
       </div>\
+    ',
+
+    list: '\
+      <ul>\
+        {{items}}\
+      </ul>\
+    ',
+
+    listItem: '\
+      <li>\
+        <div data-role="fieldcontain">\
+          <label>Measurement: </label>\
+          {{editor}}\
+        </div>\
+      </li>\
     '
   }, {
   
