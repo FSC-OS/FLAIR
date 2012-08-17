@@ -32,9 +32,7 @@ function bootStrapSites(collection) {
                             validators: ["required"],
                         }
                     },
-                    visualisation: {
-                        axis: "y"
-                    },
+                    visualisation: true,
                     site:0
                 },
                 {
@@ -102,9 +100,7 @@ function bootStrapSites(collection) {
                             listType: "Number"
                         },
                     },
-                    visualisation: {
-                        axis: "x"
-                    },
+                    visualisation: true,
                     site:0
                 },
                 {
@@ -158,9 +154,7 @@ function bootStrapSites(collection) {
                             validators: ["required"],
                         }
                     },
-                    visualisation: {
-                        axis: "y"
-                    },
+                    visualisation: true,
                     site:1
                 },
                 {
@@ -228,9 +222,7 @@ function bootStrapSites(collection) {
                             listType: "Number"
                         },
                     },
-                    visualisation: {
-                        axis: "x"
-                    },
+                    visualisation: true,
                     site:1
                 },
                 {
