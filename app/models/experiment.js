@@ -2,11 +2,13 @@
 // ----------------
 
 // Model for containing the data of an experiment.
-window.Experiment = Backbone.RelationalModel.extend({
-
-    // Function to clear this experiment
-    clear: function() {
-      this.destroy();
-    }
-
-});
+;(function() {
+	_.extend(window.FLAIR, {
+		Experiment: Backbone.RelationalModel.extend({
+		    // Function to clear this experiment
+		    clear: function() {
+		      this.destroy();
+		    }
+		})
+	});
+})();

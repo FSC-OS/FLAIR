@@ -6,7 +6,7 @@
 ;(function() {
 	_.extend(window.FLAIR, {
 		Exercise: Backbone.Collection.extend({
-		    model: Site    
+		    model: FLAIR.Site    
 		})
 	});
 })();

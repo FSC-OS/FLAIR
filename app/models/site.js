@@ -2,21 +2,23 @@
 // ----------------
 
 // Model for a site where experiments happen
-window.Site = Backbone.RelationalModel.extend({
+;(function() {
+    _.extend(window.FLAIR, {
+       Site: Backbone.RelationalModel.extend({
+            relations: [{
+                type: Backbone.HasMany,
+                key: "experiments",
+                relatedModel: "FLAIR.Experiment",
+                collectionType: "FLAIR.ExperimentCollection",
+                reverseRelation: {
+                    key: "site",
+                }
+            }],
 
-    relations: [{
-        type: Backbone.HasMany,
-        key: "experiments",
-        relatedModel: "Experiment",
-        collectionType: "FLAIR.ExperimentCollection",
-        reverseRelation: {
-            key: "site",
-        }
-    }],
-
-    // Function to clear this experiment
-    clear: function() {
-      this.destroy();
-    }
-
-});
+            // Function to clear this experiment
+            clear: function() {
+              this.destroy();
+            }
+        }) 
+    });
+})();

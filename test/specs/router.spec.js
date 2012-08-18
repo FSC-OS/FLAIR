@@ -24,7 +24,7 @@ describe("Router", function(){
         FLAIR.Sites = new FLAIR.Exercise();
 
         // Stub out the models we'll use to pass to our views
-        window.Site = Backbone.RelationalModel.extend({
+        FLAIR.Site = Backbone.RelationalModel.extend({
             // Mock out our custom isComplete function to always return true
             isComplete: function() {
                 return true;
@@ -101,7 +101,7 @@ describe("Router", function(){
         beforeEach(function() {
             window.SiteView = Backbone.View.extend({});
 
-            mockSite = new Site();
+            mockSite = new FLAIR.Site();
 
             // Mock Sites to always return our mock site
             spyOn(FLAIR.Sites, "get").andCallFake(function (siteId) {
@@ -134,7 +134,7 @@ describe("Router", function(){
     });
 
     describe("Experiment Page", function() {
-        mockExperiment = new Experiment({
+        mockExperiment = new FLAIR.Experiment({
             id:0,
             order:0,
             site:0,
@@ -149,7 +149,7 @@ describe("Router", function(){
             }    
         });
 
-        mockExperiment2 = new Experiment({
+        mockExperiment2 = new FLAIR.Experiment({
             id:1,
             order:1,
             site:0,
@@ -164,7 +164,7 @@ describe("Router", function(){
             }    
         });
 
-        mockExperiment3 = new Experiment({
+        mockExperiment3 = new FLAIR.Experiment({
             id:2,
             order:2,
             site:0,
@@ -191,7 +191,7 @@ describe("Router", function(){
             // Spy on experiments collection
             spyOn(mockExperiments, "get").andCallThrough();
 
-            mockSite = new Site();
+            mockSite = new FLAIR.Site();
             // Mock Site.get to return the mock experiments
             spyOn(mockSite, "get").andCallFake(function(attributeName) {
                 return mockExperiments;

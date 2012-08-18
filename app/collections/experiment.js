@@ -6,7 +6,7 @@
 ;(function() {
 	_.extend(window.FLAIR, {
 		ExperimentCollection: Backbone.Collection.extend({
-		    model: Experiment    
+		    model: FLAIR.Experiment    
 		})
 	});
 })();

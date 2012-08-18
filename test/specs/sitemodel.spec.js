@@ -1,7 +1,7 @@
 describe("Site Model", function () {
     
     beforeEach(function () {
-        this.completeSite = new Site(
+        this.completeSite = new FLAIR.Site(
             {
                 id:0,
                 location: {
