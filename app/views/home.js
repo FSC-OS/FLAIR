@@ -26,6 +26,6 @@ window.HomeView = Backbone.View.extend({
   },
   
   bootstrap: function() {
-  	window.bootStrapSites(this.collection);
+  	FLAIR.bootstrap(this.collection);
   }
 });

@@ -7,7 +7,7 @@ describe("Site Model", function () {
                 location: {
                     name:"Site 1"        
                 },
-                experiments: new ExperimentCollection(
+                experiments: new FLAIR.ExperimentCollection(
                     [{
                         id:0,
                         userId: "Group1",

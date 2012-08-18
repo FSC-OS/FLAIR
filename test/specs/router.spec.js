@@ -7,7 +7,7 @@ describe("Router", function(){
     // Executed before every test nested below 
     beforeEach(function () {
         // Set up the thing we're testing
-        this.router = new AppRouter();
+        this.router = new FLAIR.AppRouter();
 
         // Stub out/Spy on the changePage function, so that it doesn't
         // do anything
@@ -17,11 +17,11 @@ describe("Router", function(){
         this.routerSpy = jasmine.createSpy();
 
         // Stub out the Collections our router should pass to the View
-        window.Exercise = Backbone.Collection.extend({});
+        FLAIR.Exercise = Backbone.Collection.extend({});
 
         // Create the Sites collection we use to store the whole exercise
         // and Mock/Spy the methods we'll call so we can control the output
-        window.Sites = new Exercise();
+        FLAIR.Sites = new FLAIR.Exercise();
 
         // Stub out the models we'll use to pass to our views
         window.Site = Backbone.RelationalModel.extend({
@@ -104,7 +104,7 @@ describe("Router", function(){
             mockSite = new Site();
 
             // Mock Sites to always return our mock site
-            spyOn(window.Sites, "get").andCallFake(function (siteId) {
+            spyOn(FLAIR.Sites, "get").andCallFake(function (siteId) {
                 return mockSite;
             });
         });
@@ -125,8 +125,8 @@ describe("Router", function(){
             // force the router to go to the sites page
             this.router.navigate("#site/1", true);
 
-            // Expect window.Sites.get() to have been called with an id of 1
-            expect(window.Sites.get).toHaveBeenCalledWith('1');
+            // Expect FLAIR.Sites.get() to have been called with an id of 1
+            expect(FLAIR.Sites.get).toHaveBeenCalledWith('1');
 
             // Expect the changePage to have been called with the right params
             expect(this.router.changePage).toHaveBeenCalledWith(jasmine.any(Object), "site1");
@@ -184,9 +184,9 @@ describe("Router", function(){
             // Spy on the experiment view constructor
             this.experimentViewSpy = sinon.spy(window, "ExperimentView");
 
-            window.ExperimentCollection = Backbone.Collection.extend({});
+            FLAIR.ExperimentCollection = Backbone.Collection.extend({});
 
-            mockExperiments = new ExperimentCollection([mockExperiment, mockExperiment2, mockExperiment3]);
+            mockExperiments = new FLAIR.ExperimentCollection([mockExperiment, mockExperiment2, mockExperiment3]);
             
             // Spy on experiments collection
             spyOn(mockExperiments, "get").andCallThrough();
@@ -198,7 +198,7 @@ describe("Router", function(){
             });
 
             // Mock Sites to always return our mock site
-            spyOn(window.Sites, "get").andCallFake(function (siteId) {
+            spyOn(FLAIR.Sites, "get").andCallFake(function (siteId) {
                 return mockSite;
             });
         });
@@ -224,8 +224,8 @@ describe("Router", function(){
             // force the router to go to the experiment page
             this.router.navigate("#site/1/experiment/0", true);
 
-            // Expect window.Sites.get() to have been called with an id of 1
-            expect(window.Sites.get).toHaveBeenCalledWith('1');
+            // Expect FLAIR.Sites.get() to have been called with an id of 1
+            expect(FLAIR.Sites.get).toHaveBeenCalledWith('1');
 
             // Expect mockSite.get() to have been called with 'experiments'
             expect(mockSite.get).toHaveBeenCalledWith('experiments');

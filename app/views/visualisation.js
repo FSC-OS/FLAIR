@@ -47,6 +47,6 @@ window.VisualisationView = Backbone.View.extend({
     },
 
     renderCharts: function(charts) {
-    	visualise(charts);
+    	FLAIR.visualise(charts);
     }
 });

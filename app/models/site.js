@@ -8,7 +8,7 @@ window.Site = Backbone.RelationalModel.extend({
         type: Backbone.HasMany,
         key: "experiments",
         relatedModel: "Experiment",
-        collectionType: "ExperimentCollection",
+        collectionType: "FLAIR.ExperimentCollection",
         reverseRelation: {
             key: "site",
         }
