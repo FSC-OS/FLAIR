@@ -12,7 +12,7 @@
                     location: {
                         name:"Site 1"        
                     },
-                    visualisation: "crossSection",
+                    visualisation: "riverCrossSection",
                     experiments: new FLAIR.ExperimentCollection(
                         [{
                             id:0,
@@ -135,7 +135,7 @@
                     location: {
                         name:"Site 2"        
                     },
-                    visualisations: "crossSection",
+                    visualisations: "riverCrossSection",
                     experiments: new FLAIR.ExperimentCollection(
                         [{
                             id:5,

@@ -1,12 +1,10 @@
 ;(function() {
 
-	FLAIR.visualisations = FLAIR.visualisations || {};
-
 	_.extend(FLAIR, {
 		// Add the crossSection visualisation to the 
 		// FLAIR.visualisations object
 		visualisations: _.extend(FLAIR.visualisations, {
-				crossSection: function(charts){
+				riverCrossSection: function(charts){
 					visualiseCrossSection(charts);
 				}
 		})
