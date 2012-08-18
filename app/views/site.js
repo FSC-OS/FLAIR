@@ -3,16 +3,20 @@
 
 // A separate view which takes a Site model and displays it as a list
 // of the experiments contained within
-window.SiteView = Backbone.View.extend({
+;(function() {
+	_.extend(window.FLAIR, {
+		SiteView: Backbone.View.extend({
 
-    template:_.template($("#site").html()),
+		    template: _.template($("#site").html()),
 
-    render:function (eventName) {
-    	// Sort the models by their order property
-    	var sortedModel = this.model.toJSON();
-    	sortedModel.experiments = _.sortBy(sortedModel.experiments, "order");
-        $(this.el).html(this.template({site: sortedModel}));
-        return this;
-    }
+		    render:function (eventName) {
+		    	// Sort the models by their order property
+		    	var sortedModel = this.model.toJSON();
+		    	sortedModel.experiments = _.sortBy(sortedModel.experiments, "order");
+		        $(this.el).html(this.template({site: sortedModel}));
+		        return this;
+		    }
 
-});
+		})
+	});
+})();

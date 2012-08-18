@@ -1,8 +1,15 @@
 ;(function() {
+
+	FLAIR.visualisations = FLAIR.visualisations || {};
+
 	_.extend(FLAIR, {
-		visualise: function(charts){
-			visualiseCrossSection(charts);
-		}
+		// Add the crossSection visualisation to the 
+		// FLAIR.visualisations object
+		visualisations: _.extend(FLAIR.visualisations, {
+				crossSection: function(charts){
+					visualiseCrossSection(charts);
+				}
+		})
 	});
 
 	function visualiseCrossSection(charts) {
@@ -38,6 +45,7 @@
 
 			    return {
 			    	id: chart.id,
+			    	title: chart.site.get("location").name,
 			    	wetWidth: wetWidth,
 			    	depthMeasurements: depthMeasurements,
 			    }
@@ -45,11 +53,11 @@
 		});
 		// Create a chart for each of them
 		_.each(validCharts, function(chart){
-			createCrossSection(chart.id, chart.wetWidth, chart.depthMeasurements, maxWidth, maxDepth);
+			createCrossSection(chart.id, chart.title, chart.wetWidth, chart.depthMeasurements, maxWidth, maxDepth);
 		});
 	}
 
-	function createCrossSection(chartDivId, wetWidth, depthMeasurements, maxWidth, maxDepth) {				
+	function createCrossSection(chartDivId, title, wetWidth, depthMeasurements, maxWidth, maxDepth) {				
 		// Draw a wicked graph
 		var points = [];
 		var wetWidthPoints = [];
@@ -58,6 +66,7 @@
 		var sectionWidth = wetWidth / numDepthPoints;
 		var seriesDescriptions = [];
 		var options = {
+			title: title,
 			axes: {
 				xaxis: {
 					min: 0,

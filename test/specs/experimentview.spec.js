@@ -27,7 +27,7 @@ describe("Experiment View", function() {
             }
         });
 
-        this.view = new ExperimentView({model: mockExperiment, pageId: "page-id", next: "next", previous: "previous"});
+        this.view = new FLAIR.ExperimentView({model: mockExperiment, pageId: "page-id", next: "next", previous: "previous"});
 
         this.view.render();
 	});

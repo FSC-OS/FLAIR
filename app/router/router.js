@@ -19,17 +19,17 @@
             },
 
             home:function () {
-                this.changePage(new HomeView({collection: FLAIR.Sites}), "home");
+                this.changePage(new FLAIR.HomeView({collection: FLAIR.Sites}), "home");
             },
 
             visualisation:function () {
-                this.changePage(new VisualisationView({collection: FLAIR.Sites}), "visualisation");
+                this.changePage(new FLAIR.VisualisationView({collection: FLAIR.Sites}), "visualisation");
             },
 
             site:function (siteId) {
                 var pageId = "site" + siteId;
                 var site = FLAIR.Sites.get(siteId);
-                this.changePage(new SiteView({model: site}), pageId);
+                this.changePage(new FLAIR.SiteView({model: site}), pageId);
             },
 
             experiment:function(siteId, experimentId) {
@@ -45,7 +45,7 @@
                 var next = (order < (experiments.length - 1)) ? "#site/" + siteId + "/experiment/" + (parseInt(experimentId) + 1) : "#site/" + siteId;
 
                 this.changePage(
-                    new ExperimentView(
+                    new FLAIR.ExperimentView(
                         {
                             model: experiment,
                             pageId: pageId,

@@ -45,7 +45,7 @@ describe("Router", function(){
     describe("Home Page Router", function () {    
         beforeEach(function () {
             // Stub out the views our router should call
-            window.HomeView = Backbone.View.extend({});
+            FLAIR.HomeView = Backbone.View.extend({});
         });
 
         it("Should route to the homepage with a blank hash", function () {
@@ -73,7 +73,7 @@ describe("Router", function(){
         // Visualisation Page
 
         beforeEach(function() {
-            window.VisualisationView = Backbone.View.extend({});
+            FLAIR.VisualisationView = Backbone.View.extend({});
         });
 
         it("Should route to the visualisation page on #visualisation", function () {
@@ -99,7 +99,7 @@ describe("Router", function(){
 
     describe("Site Page Router", function() {
         beforeEach(function() {
-            window.SiteView = Backbone.View.extend({});
+            FLAIR.SiteView = Backbone.View.extend({});
 
             mockSite = new FLAIR.Site();
 
@@ -180,9 +180,9 @@ describe("Router", function(){
         });
 
         beforeEach(function() {
-            window.ExperimentView = Backbone.View.extend({});
+            FLAIR.ExperimentView = Backbone.View.extend({});
             // Spy on the experiment view constructor
-            this.experimentViewSpy = sinon.spy(window, "ExperimentView");
+            this.experimentViewSpy = sinon.spy(FLAIR, "ExperimentView");
 
             FLAIR.ExperimentCollection = Backbone.Collection.extend({});
 
@@ -205,7 +205,7 @@ describe("Router", function(){
 
         afterEach(function() {
             // Remove the spy on the ExperimentView constructor
-            window.ExperimentView.restore();
+            FLAIR.ExperimentView.restore();
         });
         
         it("Should route to the experiment page on #site/1/experiment/0", function () {
