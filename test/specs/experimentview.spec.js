@@ -6,7 +6,8 @@ describe("Experiment View", function() {
 
 		mockExperiment = new Backbone.Model({
 			id:1,
-			url: "test",
+			order:0,
+            site:0,
             userId: "Group1",
             groupId: "Group1",
             datetime: "2012-01-01",
@@ -23,12 +24,6 @@ describe("Experiment View", function() {
                     type: "Number",
                     validators: ["required"],
                 }
-            },
-            site: {
-            	id:1,
-	            location: {
-	                name:"Site1"        
-	            }
             }
         });
 

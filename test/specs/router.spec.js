@@ -134,6 +134,51 @@ describe("Router", function(){
     });
 
     describe("Experiment Page", function() {
+        mockExperiment = new Experiment({
+            id:0,
+            order:0,
+            site:0,
+            userId: "Group1",
+            groupId: "Group1",
+            datetime: "2012-01-01",
+            experimentType: "Wet Width",
+            notes: "",
+            data: {
+                measurement:1.9,
+                unitOfMeasurement:"m" 
+            }    
+        });
+
+        mockExperiment2 = new Experiment({
+            id:1,
+            order:1,
+            site:0,
+            userId: "Group1",
+            groupId: "Group1",
+            datetime: "2012-01-01",
+            experimentType: "Wet Width",
+            notes: "",
+            data: {
+                measurement:1.9,
+                unitOfMeasurement:"m" 
+            }    
+        });
+
+        mockExperiment3 = new Experiment({
+            id:2,
+            order:2,
+            site:0,
+            userId: "Group1",
+            groupId: "Group1",
+            datetime: "2012-01-01",
+            experimentType: "Wet Width",
+            notes: "",
+            data: {
+                measurement:1.9,
+                unitOfMeasurement:"m" 
+            }    
+        });
+
         beforeEach(function() {
             window.ExperimentView = Backbone.View.extend({});
             // Spy on the experiment view constructor
@@ -141,23 +186,10 @@ describe("Router", function(){
 
             window.ExperimentCollection = Backbone.Collection.extend({});
 
-            mockExperiments = new ExperimentCollection();
-            mockExperiment = {
-                id:0,
-                userId: "Group1",
-                groupId: "Group1",
-                datetime: "2012-01-01",
-                experimentType: "Wet Width",
-                notes: "",
-                data: {
-                    measurement:1.9,
-                    unitOfMeasurement:"m" 
-                }    
-            };
-            // Mock Experiments.get to always return 1 experiment with id=1
-            spyOn(mockExperiments, "get").andCallFake(function (experimentId){
-                return mockExperiment;
-            });
+            mockExperiments = new ExperimentCollection([mockExperiment, mockExperiment2, mockExperiment3]);
+            
+            // Spy on experiments collection
+            spyOn(mockExperiments, "get").andCallThrough();
 
             mockSite = new Site();
             // Mock Site.get to return the mock experiments
@@ -205,28 +237,8 @@ describe("Router", function(){
             expect(this.router.changePage).toHaveBeenCalledWith(jasmine.any(Object), "site1-experiment0");
         });
 
-        it("Should pass the right parameters to the ExperimentView constructor", function(){
-            // force the router to go to the experiment page
-            this.router.navigate("#site/1/experiment/0", true);
 
-            // Expected links for the page
-            var expectedPreviousLink = "#site/1";
-            var expectedNextLink = "#site/1";
-
-            sinon.assert.calledWith(
-                this.experimentViewSpy,
-                {
-                    model: mockExperiment,
-                    pageId: "site1-experiment0", 
-                    next: expectedNextLink, 
-                    previous: expectedPreviousLink
-                }
-            );
-        });
-
-        it("Should calculate next and previous links properly on the first page", function() {
-            // Fake the length of the experiments collection to be 3
-            mockExperiments.length = 3;
+        it("Should pass the right parameters on the first experiment", function() {
 
             this.router.navigate("#site/1/experiment/0", true);
             var expectedPreviousLink = "#site/1";
@@ -242,9 +254,7 @@ describe("Router", function(){
             );
         });
 
-        it("Should calculate next and previous links properly on the second page", function() {
-            // Fake the length of the experiments collection to be 3
-            mockExperiments.length = 3;
+        it("Should pass the right parameters on the second experiment", function() {
 
             this.router.navigate("#site/1/experiment/1", true);
             var expectedPreviousLink = "#site/1/experiment/0";
@@ -252,7 +262,7 @@ describe("Router", function(){
             sinon.assert.calledWith(
                 this.experimentViewSpy,
                 {
-                    model: mockExperiment,
+                    model: mockExperiment2,
                     pageId: "site1-experiment1", 
                     next: expectedNextLink, 
                     previous: expectedPreviousLink
@@ -260,9 +270,7 @@ describe("Router", function(){
             );
         });
 
-        it("Should calculate next and previous links properly on the last page", function() {
-            // Fake the length of the experiments collection to be 3
-            mockExperiments.length = 3;
+        it("Should pass the right parameters on the last experiment", function() {
 
             this.router.navigate("#site/1/experiment/2", true);
             var expectedPreviousLink = "#site/1/experiment/1";
@@ -270,7 +278,7 @@ describe("Router", function(){
             sinon.assert.calledWith(
                 this.experimentViewSpy,
                 {
-                    model: mockExperiment,
+                    model: mockExperiment3,
                     pageId: "site1-experiment2", 
                     next: expectedNextLink, 
                     previous: expectedPreviousLink
