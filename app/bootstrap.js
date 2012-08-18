@@ -134,7 +134,7 @@
                     location: {
                         name:"Site 2"        
                     },
-                    experiments: new ExperimentCollection(
+                    experiments: new FLAIR.ExperimentCollection(
                         [{
                             id:5,
                             order:0,
