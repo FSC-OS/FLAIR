@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+	<!-- Phonegap build config file -->
+
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id="org.field-studies-council.flair" 
+        version="0.0.1">
+
+        	<!-- App Name/Title -->
+			<name>FSC - FLAIR</name>
+
+			<!-- Short description -->
+			<description>An open data collection and visualisation app for fieldwork. Developed by the Field Studies Council, UK.</description>
+
+			<!-- Author, should this be the FSC? -->
+			<author href="http://stevenday.tumblr.com" email="forestorama@gmail.com">Steven Day</author>
+
+			<!-- Choose a phonegap version -->
+			<preference name="phonegap-version" value="2.0.0" />
+
+			<!-- Set a default icon -->
+			<icon src="icon.png" />
+
+			<!-- We don't need any device permissions at the moment -->
+			<preference name="permissions" value="none"/>
+
+			<!-- External sites to allow access to -->
+			<!-- We probably want to make this explicit to the "hub" server -->
+			<access origin="*" />
+
+	</widget>
