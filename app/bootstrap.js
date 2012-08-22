@@ -24,7 +24,7 @@
                             help: "The Wet Width is the width of the water at the water line",
                             notes: "",
                             data: {
-                                measurement:null,
+                                measurement:"null",
                                 unitOfMeasurement:"m"
                             },
                             schema: {
@@ -47,7 +47,7 @@
                             notes: "",
                             help: "The wetted perimeter is the distance across the bed of the river plus the width across the surface",
                             data: {
-                                measurement:null,
+                                measurement:"null",
                                 unitOfMeasurement:"m"     
                             },
                             schema: {
@@ -69,7 +69,7 @@
                             notes: "",
                             help: "Use your clinometer to measure the gradient of the surface of the water",
                             data: {
-                                measurement:0,
+                                measurement:"null",
                                 unitOfMeasurement:"degree"        
                             },
                             schema: {
@@ -147,7 +147,7 @@
                             help: "The Wet Width is the width of the water at the water line",
                             notes: "",
                             data: {
-                                measurement:null,
+                                measurement:"null",
                                 unitOfMeasurement:"m"
                             },
                             schema: {
@@ -170,7 +170,7 @@
                             notes: "",
                             help: "The wetted perimeter is the distance across the bed of the river plus the width across the surface",
                             data: {
-                                measurement:null,
+                                measurement:"null",
                                 unitOfMeasurement:"m"     
                             },
                             schema: {
@@ -192,7 +192,7 @@
                             notes: "",
                             help: "Use your clinometer to measure the gradient of the surface of the water",
                             data: {
-                                measurement:0,
+                                measurement:"null",
                                 unitOfMeasurement:"degree"        
                             },
                             schema: {
