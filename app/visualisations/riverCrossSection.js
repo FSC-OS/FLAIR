@@ -11,19 +11,18 @@
 	});
 
 	function visualiseCrossSection(charts) {
-		// Show the loading message because this takes a while on some
-		// slow phones
-		$.mobile.showPageLoadingMsg();
-
 		// charts is an array of chart objects which look like:
 		// {
 		//   id: the div id for this chart
 		//	 models: an array of Experiment Backbone models with data.measurement attributes to chart
 		// }
+		var maxWidth, maxDepth = 0, plots = [];
+
+		// Show the loading message because this takes a while on some
+		// slow phones
+		$.mobile.showPageLoadingMsg();
 
 		// Pull out the valid charts and add some values to them
-		var maxWidth = 0;
-		var maxDepth = 0;
 		var validCharts = _.map(charts, function(chart, key, list){
 			var wetWidthModel = _.find(chart.models, function(experiment) {
 				return experiment.get("experimentType") === "Wet Width"; 
@@ -62,10 +61,30 @@
 			}
 		});
 		
-		// Create a chart for each of them
-		_.each(validCharts, function(chart){
-			createCrossSection(chart.id, chart.title, chart.wetWidth, chart.depthMeasurements, maxWidth, maxDepth);
+		// Draw them all
+		plots = createAllCrossSections(validCharts, maxDepth, maxWidth);
+
+		// Bind to orientationchange and resize events to redraw the graphs
+		$(window).on("orientationchange, resize", function(e) {
+			$.mobile.showPageLoadingMsg();
+			// Remove each old plot
+			_.each(plots, function(plot) {
+				plot.destroy();
+				$(plot.targetId).empty();
+			});
+			// Add in new ones
+			plots = createAllCrossSections(validCharts, maxDepth, maxWidth);
 		});
+
+	}
+
+	function createAllCrossSections(charts, maxDepth, maxWidth) {
+		// Create a chart for each of them
+		var plots = [];
+		_.each(charts, function(chart){
+			plots.push(createCrossSection(chart.id, chart.title, chart.wetWidth, chart.depthMeasurements, maxWidth, maxDepth));
+		});
+		return plots;
 	}
 
 	function createCrossSection(chartDivId, title, wetWidth, depthMeasurements, maxWidth, maxDepth) {	
@@ -106,7 +125,7 @@
 		points.push(wetWidthPoints)
 		points.push(depthPoints);
 		
-		$.jqplot(chartDivId,points,options);
+		return $.jqplot(chartDivId,points,options);
 	}
 
 })(FLAIR, Backbone, _, $);
