@@ -11,6 +11,10 @@
 	});
 
 	function visualiseCrossSection(charts) {
+		// Show the loading message because this takes a while on some
+		// slow phones
+		$.mobile.showPageLoadingMsg();
+
 		// charts is an array of chart objects which look like:
 		// {
 		//   id: the div id for this chart
@@ -49,13 +53,22 @@
 			    }
 			}
 		});
+
+		// Set a "postDraw" callback so that we can turn off the loading image
+		// after the last graph 
+		$.jqplot.postDrawHooks.push(function (){
+			if(this.targetId === "#" + _.last(validCharts).id) {
+				$.mobile.hidePageLoadingMsg();
+			}
+		});
+		
 		// Create a chart for each of them
 		_.each(validCharts, function(chart){
 			createCrossSection(chart.id, chart.title, chart.wetWidth, chart.depthMeasurements, maxWidth, maxDepth);
 		});
 	}
 
-	function createCrossSection(chartDivId, title, wetWidth, depthMeasurements, maxWidth, maxDepth) {				
+	function createCrossSection(chartDivId, title, wetWidth, depthMeasurements, maxWidth, maxDepth) {	
 		// Draw a wicked graph
 		var points = [];
 		var wetWidthPoints = [];
