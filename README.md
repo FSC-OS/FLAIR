@@ -3,13 +3,21 @@ FLAIR
 
 Open Source Fieldwork Tool
 
-Live Example
+Live Examples
 ------------
-A live example of the app that you can try is running at:
+A live example of the app that you can try in your browser (on phone or desktop) is running at:
 
 http://flair-stevenday.rhcloud.com/static/prototype/index.html
 
-Currently this only has two sites to keep it simple, and the visualisation leaves a bit to be desired. Please do give it a go though, especially in iOS devices, and see if you can break anything.
+App versions of the above for Android, Blackberry, Windows Phone, WebOs and Symbian can be found at:
+
+https://build.phonegap.com/apps/189499
+
+I'm not sure how this works for other systems, but for Android you need to enable the setting on your phone that lets you install apps from places other than the default app store, and then download the Android file from the above link before opening it to install the app.
+
+I've personally tested it on a HTC Hero, and everything seems to function correctly. It would be great to get other people to test this too and please report any bugs you find in the issues list.
+
+Currently this demo only has two sites to keep it simple. Please do give it a go though, especially in iOS devices, and see if you can break anything.
 
 ### Instructions
 On you first visit you'll need to click the `Load default sites` button, which simulates loading an exercise configuration from somewhere. Then you'll see two sites which you can navigate in a similar way to the previous version of the app. Then only real difference is the site page I've added, so that you can see all the experiments at each site, and the fact that I've broken the 'experiments' up a bit, to illustrate that they're configurable now.
