@@ -1,9 +1,9 @@
 /**
  * function to start the app
  */
-;(function() {
+;(function(FLAIR, Backbone, _, $) {
 	var startApp = function() {
-		_.extend(window.FLAIR, {
+		_.extend(FLAIR, {
 			Sites: new FLAIR.Exercise(),
 		    app: new FLAIR.AppRouter()
 		});
@@ -21,4 +21,4 @@
 	else {
 	    $(document).ready(startApp);
 	}
-})();
+})(FLAIR, Backbone, _, $);

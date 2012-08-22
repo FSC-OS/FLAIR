@@ -2,8 +2,8 @@
 // ---------
 
 // The home view is the top level piece of UI of our app
-;(function() {
-  _.extend(window.FLAIR, {
+;(function(FLAIR, Backbone, _, $) {
+  _.extend(FLAIR, {
       HomeView: Backbone.View.extend({
 
       template: _.template($("#home").html()),
@@ -32,4 +32,4 @@
       }
     })
   })
-})();
+})(FLAIR, Backbone, _, $);

@@ -1,5 +1,5 @@
 // Configure jquery mobile
-;(function() {
+;(function($) {
     $(document).on('mobileinit', function(){
         // Setup some jquery mobile defaults
         $.mobile.ajaxEnabled = false;
@@ -14,4 +14,4 @@
             $(event.currentTarget).unbind();
         });
     });
-})();
+})($);

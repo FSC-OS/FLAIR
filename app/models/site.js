@@ -2,8 +2,8 @@
 // ----------------
 
 // Model for a site where experiments happen
-;(function() {
-    _.extend(window.FLAIR, {
+;(function(FLAIR, Backbone, _, $) {
+    _.extend(FLAIR, {
        Site: Backbone.RelationalModel.extend({
             relations: [{
                 type: Backbone.HasMany,
@@ -21,4 +21,4 @@
             }
         }) 
     });
-})();
+})(FLAIR, Backbone, _, $);

@@ -1,5 +1,5 @@
 // Custom functions to do crud stuff
-;(function() {
+;(function(FLAIR, Backbone, _, $) {
 	Backbone.FlairStorage = function(name) {
 		this.name = name;
 	};
@@ -76,7 +76,7 @@
 
 	});
 
-	_.extend(window.FLAIR, {
+	_.extend(FLAIR, {
 		Store: new Backbone.FlairStorage("flair")
 	});
 
@@ -117,4 +117,4 @@
 			options.error("Record not found");
 		}
 	}
-})();
+})(FLAIR, Backbone, _, $);

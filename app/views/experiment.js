@@ -3,9 +3,9 @@
 
 // A view which takes an Experiment model and displays it as a dump
 // of the JSON fields within
-;(function() {
+;(function(FLAIR, Backbone, _, $) {
 
-    _.extend(window.FLAIR, {
+    _.extend(FLAIR, {
 
         ExperimentView: Backbone.View.extend({
 
@@ -65,4 +65,4 @@
             }
         })
     });
-})();
+})(FLAIR, Backbone, _, $);

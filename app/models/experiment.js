@@ -2,8 +2,8 @@
 // ----------------
 
 // Model for containing the data of an experiment.
-;(function() {
-	_.extend(window.FLAIR, {
+;(function(FLAIR, Backbone, _, $) {
+	_.extend(FLAIR, {
 		Experiment: Backbone.RelationalModel.extend({
 		    // Function to clear this experiment
 		    clear: function() {
@@ -11,4 +11,4 @@
 		    }
 		})
 	});
-})();
+})(FLAIR, Backbone, _, $);

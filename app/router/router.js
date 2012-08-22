@@ -1,10 +1,13 @@
 /**
 * Router
-* Override Backbone"s router so that it uses jQuery Mobile"s changePage() 
-* method to change pages
+* An extended version of Backbone's Router class which provides
+* the 'glue' that combines our models and views into an app that
+* responds to url changes. Uses jQuery Mobile's manual "changePage"
+* function to actually do the changing, so that jQM understands 
+* what Backbone is playing at.
 */
-;(function() {
-    _.extend(window.FLAIR, {
+;(function(FLAIR, Backbone, _, $) {
+    _.extend(FLAIR, {
         AppRouter: Backbone.Router.extend({
 
             routes:{
@@ -73,4 +76,4 @@
 
         })
     });
-})();
+})(FLAIR, Backbone, _, $);

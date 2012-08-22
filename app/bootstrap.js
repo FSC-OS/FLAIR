@@ -1,8 +1,8 @@
 // Bootstrapped Collection of sites, eventually this will be loaded
 // from somewhere else, but this allows us to click a button and get
 // sites just like that.
-;(function() {
-    _.extend(window.FLAIR, {
+;(function(FLAIR, Backbone, _, $) {
+    _.extend(FLAIR, {
         bootstrap: function(collection) {
             // Populate it with some data - this is just "in-memory" until
             // we save it to the persistence
@@ -261,4 +261,4 @@
             });
         }
     });
-})();
+})(FLAIR, Backbone, _, $);

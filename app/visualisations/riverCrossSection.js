@@ -1,4 +1,4 @@
-;(function() {
+;(function(FLAIR, Backbone, _, $) {
 
 	_.extend(FLAIR, {
 		// Add the crossSection visualisation to the 
@@ -96,4 +96,4 @@
 		$.jqplot(chartDivId,points,options);
 	}
 
-})();
+})(FLAIR, Backbone, _, $);

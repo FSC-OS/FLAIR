@@ -3,9 +3,9 @@
 
 // A separate view which takes the Experiments collection
 // and displays a visualisation of it
-;(function() {
+;(function(FLAIR, Backbone, _, $) {
 
-    _.extend(window.FLAIR, {
+    _.extend(FLAIR, {
 
         VisualisationView: Backbone.View.extend({
 
@@ -49,7 +49,6 @@
                 // be visualised differently, and then we'll struggle with things
                 // like where we need to calculate the max of all sites in the
                 // visualisation code
-                console.log(this.collection.models[0]);
                 var visualisationFunction = this.collection.models[0].get("visualisation");
 
                 // Call the charting function
@@ -67,4 +66,4 @@
             }
         })
     });
-})();
+})(FLAIR, Backbone, _, $);

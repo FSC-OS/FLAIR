@@ -3,8 +3,8 @@
 
 // A separate view which takes a Site model and displays it as a list
 // of the experiments contained within
-;(function() {
-	_.extend(window.FLAIR, {
+;(function(FLAIR, Backbone, _, $) {
+	_.extend(FLAIR, {
 		SiteView: Backbone.View.extend({
 
 		    template: _.template($("#site").html()),
@@ -19,4 +19,4 @@
 
 		})
 	});
-})();
+})(FLAIR, Backbone, _, $);

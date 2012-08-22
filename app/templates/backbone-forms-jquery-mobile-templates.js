@@ -16,7 +16,7 @@
  * - "data-type" attributes are required.
  * - The main placeholder tags such as the following are required: fieldsets, fields
  */
-;(function() {
+;(function(Backbone) {
   var Form = Backbone.Form;
 
   Form.setTemplates({
@@ -62,4 +62,4 @@
   });
 
 
-})();
+})(Backbone);
