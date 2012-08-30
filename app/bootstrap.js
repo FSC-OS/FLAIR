@@ -91,7 +91,7 @@
                             notes: "",
                             help: "Next we need to measure the depth of the water at 5 points across it. Make sure you evenly space you measurements.",
                             data: {
-                                measurement:[0,0,0,0,0],
+                                measurement:["null","null","null","null","null"],
                                 unitOfMeasurement:"m" 
                             },
                             schema: {
@@ -99,7 +99,7 @@
                                     title: "Wet Water Depth (m)",
                                     type: "List",
                                     validators: ["required"],
-                                    listType: "Number"
+                                    itemType: "Number"
                                 },
                             },
                             visualisation: true,
@@ -115,7 +115,7 @@
                             notes: "",
                             help: "Measure how long it takes the impellor to go from one end to the other at 5 different points across the river. Again, make sure you measure at even points.",
                             data: {
-                                measurement:[0,0,0,0,0],
+                                measurement:["null","null","null","null","null"],
                                 unitOfMeasurement:"s" 
                             },
                             schema: {
@@ -123,7 +123,7 @@
                                     title: "Impellor time (secs)",
                                     type: "List",
                                     validators: ["required"],
-                                    listType: "Number"
+                                    itemType: "Number"
                                 },
                             },
                             site:0
@@ -214,7 +214,7 @@
                             notes: "",
                             help: "Next we need to measure the depth of the water at 5 points across it. Make sure you evenly space you measurements.",
                             data: {
-                                measurement:[0,0,0,0,0],
+                                measurement:["null","null","null","null","null"],
                                 unitOfMeasurement:"m" 
                             },
                             schema: {
@@ -222,7 +222,7 @@
                                     title: "Wet Water Depth (m)",
                                     type: "List",
                                     validators: ["required"],
-                                    listType: "Number"
+                                    itemType: "Number"
                                 },
                             },
                             visualisation: true,
@@ -238,7 +238,7 @@
                             notes: "",
                             help: "Measure how long it takes the impellor to go from one end to the other at 5 different points across the river. Again, make sure you measure at even points.",
                             data: {
-                                measurement:[0,0,0,0,0],
+                                measurement:["null","null","null","null","null"],
                                 unitOfMeasurement:"s" 
                             },
                             schema: {
@@ -246,7 +246,7 @@
                                     title: "Impellor time (secs)",
                                     type: "List",
                                     validators: ["required"],
-                                    listType: "Number"
+                                    itemType: "Number"
                                 },
                             },
                             site:1
