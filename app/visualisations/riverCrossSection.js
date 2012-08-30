@@ -5,7 +5,7 @@
 		// FLAIR.visualisations object
 		visualisations: _.extend(FLAIR.visualisations, {
 				riverCrossSection: function(charts){
-					visualiseCrossSection(charts);
+					return visualiseCrossSection(charts);
 				}
 		})
 	});
@@ -50,18 +50,7 @@
 		});
 		
 		// Draw them all
-		plots = createAllCrossSections(validCharts, maxWidth, maxDepth);
-
-		// Bind to orientationchange and resize events to redraw the graphs
-		$(window).on("orientationchange, resize", function(e) {
-			// Remove each old plot
-			_.each(plots, function(plot) {
-				plot.destroy();
-				$(plot.targetId).empty();
-			});
-			// Add in new ones
-			plots = createAllCrossSections(validCharts, maxWidth, maxDepth);
-		});
+		return createAllCrossSections(validCharts, maxWidth, maxDepth);
 
 	}
 

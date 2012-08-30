@@ -10,6 +10,8 @@
     _.extend(FLAIR, {
         AppRouter: Backbone.Router.extend({
 
+            currentView: null,
+
             routes:{
                 "":"home",
                 "visualisation":"visualisation",
@@ -60,18 +62,24 @@
                 );
             },
 
-            changePage:function (page, id) {
-                $(page.el).attr("data-role", "page");
-                $(page.el).attr("id", id);
-                page.render();
-                $("body").append($(page.el));
+            changePage:function (view, id) {
+                $(view.el).attr("data-role", "page");
+                $(view.el).attr("id", id);
+                view.render();
+                $("body").append($(view.el));
                 $.mobile.changePage(
-                    $(page.el),
+                    $(view.el),
                     {
                         changeHash:false, 
                         transition: $.mobile.defaultPageTransition
                     }
                 );
+
+                // Remove the old view
+                if(!_.isNull(this.currentView)) {
+                    this.currentView.remove();
+                }
+                this.currentView = view;
             }
 
         })
