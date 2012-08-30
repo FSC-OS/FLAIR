@@ -96,7 +96,7 @@
                             },
                             schema: {
                                 measurement: {
-                                    title: "Wet Water Depth",
+                                    title: "Wet Water Depth (m)",
                                     type: "List",
                                     validators: ["required"],
                                     listType: "Number"
@@ -219,7 +219,7 @@
                             },
                             schema: {
                                 measurement: {
-                                    title: "Wet Water Depth",
+                                    title: "Wet Water Depth (m)",
                                     type: "List",
                                     validators: ["required"],
                                     listType: "Number"

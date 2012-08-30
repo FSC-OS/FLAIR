@@ -4,6 +4,7 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"">
     <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css"/>
+    <link rel="stylesheet" href="css/jquery.jqplot.min.css"/>
 
 
     <!-- Templates -->
@@ -39,7 +40,12 @@
             <h1>Visualisation</h1>
         </div>
 
-        <div data-role="content"></div>
+        <div data-role="content">
+            <!-- This will be replaced when we load the visualisations -->
+            <div style="text-align:center" id="visualisation-loader">
+                <img src="css/images/ajax-loader.png" alt="Loading..."/>
+            </div>
+        </div>
 
     </script>
 

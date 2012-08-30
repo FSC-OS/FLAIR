@@ -56,7 +56,10 @@
                 // to, and so will fail. This makes it happen after all the real rendering
                 // has taken place. A better solution will require a charting lib that
                 // doesn't need this, which I couldn't find in the time.
-                setTimeout(function () {that.renderCharts(charts, visualisationFunction)}, 0);
+                setTimeout(function () {
+                    that.renderCharts(charts, visualisationFunction);
+                    $("#visualisation-loader").remove();
+                }, 0);
 
                 return this;
             },
