@@ -171,7 +171,7 @@ The main point of interest is the `data` object, and the `schema` object, which 
                 // It does allow arbitrarily size lists, where you can add/remove
                 // items at will, but I've overwritten the editor template to remove 
                 // those options so that we can fix it to a given size.
-                measurement:[0,0,0,0,0],
+                measurement:["null","null","null","null","null"],
         
                 unitOfMeasurement:"m" 
         
@@ -188,7 +188,7 @@ The main point of interest is the `data` object, and the `schema` object, which 
                     validators: ["required"],
 
                     // Tell backbone forms what type of data each element in the list is
-                    listType: "Number"
+                    itemType: "Number"
                 
                 },
             }
