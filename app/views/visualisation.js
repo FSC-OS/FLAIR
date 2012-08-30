@@ -85,6 +85,9 @@
                 // If we get called again before then this just resets the timeout
                 // and starts over.
                 var that = this;
+                // We can empty the content every time because that's pretty quick
+                // and it makes it look like something is happening
+                $(that.el).find("div[data-role='content']").empty();
                 clearTimeout(that.resizeTimeoutId);
                 that.resizeTimeoutId = setTimeout(function() {
                     that.render();
